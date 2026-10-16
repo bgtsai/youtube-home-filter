@@ -1,0 +1,180 @@
+[
+ {
+  "id": "home-new",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "天高海闊張修杰",
+    "3013",
+    "1 小時前"
+   ]
+  ],
+  "href": "/watch?v=e1",
+  "expect": "show",
+  "why": "1 小時前，未超過門檻"
+ },
+ {
+  "id": "home-old",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "某頻道",
+    "5000",
+    "3 個月前"
+   ]
+  ],
+  "href": "/watch?v=e2",
+  "expect": "hide",
+  "why": "3 個月前 > 2 天門檻"
+ },
+ {
+  "id": "home-mix",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_PLAYLIST",
+  "badge": null,
+  "collection": true,
+  "rows": [
+   [
+    "羅賓·阿黛爾·安德森和其他藝人",
+    "播放清單"
+   ]
+  ],
+  "href": "/watch?v=URLwenN1aws&list=RDURLwenN1aws&start_radio=1",
+  "expect": "hide",
+  "why": "混合輯 list=RD"
+ },
+ {
+  "id": "home-pl",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_PLAYLIST",
+  "badge": null,
+  "collection": true,
+  "rows": [
+   [
+    "某頻道",
+    "播放清單"
+   ]
+  ],
+  "href": "/watch?v=x&list=PLabcdef",
+  "expect": "show",
+  "why": "一般播放清單，未開啟該過濾"
+ },
+ {
+  "id": "live-now",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "LIVE",
+  "rows": [
+   [
+    "2948 人正在觀看"
+   ]
+  ],
+  "href": "/watch?v=e3",
+  "expect": "hide",
+  "why": "正在直播"
+ },
+ {
+  "id": "live-past",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "8.8萬",
+    "直播時間：3 天前"
+   ]
+  ],
+  "href": "/watch?v=e4",
+  "expect": "hide",
+  "why": "存檔 3 天前 > 門檻（非因直播）"
+ },
+ {
+  "id": "live-past-new",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "8.8萬",
+    "直播時間：1 小時前"
+   ]
+  ],
+  "href": "/watch?v=e5",
+  "expect": "show",
+  "why": "直播存檔但很新 → 不該被當直播擋掉"
+ },
+ {
+  "id": "side-video",
+  "bare": true,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "AI 101"
+   ],
+   [
+    "2094",
+    "4 小時前"
+   ]
+  ],
+  "href": "/watch?v=e6",
+  "expect": "show",
+  "why": "側欄，4 小時前未超門檻"
+ },
+ {
+  "id": "side-member",
+  "bare": true,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "方偉時間"
+   ],
+   [
+    "5 小時前"
+   ],
+   []
+  ],
+  "href": "/watch?v=e7",
+  "expect": "show",
+  "why": "側欄會員、末列空陣列，時間仍須解析正確"
+ },
+ {
+  "id": "side-old",
+  "bare": true,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "某頻道"
+   ],
+   [
+    "123",
+    "2 年前"
+   ],
+   []
+  ],
+  "href": "/watch?v=e8",
+  "expect": "hide",
+  "why": "側欄舊片 → 驗證播放頁過濾生效"
+ },
+ {
+  "id": "podcast",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_PODCAST",
+  "badge": null,
+  "rows": [
+   [
+    "某頻道",
+    "1 小時前"
+   ]
+  ],
+  "href": "/watch?v=e9",
+  "expect": "hide",
+  "why": "Podcast 列舉值"
+ }
+]
