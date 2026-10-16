@@ -22,6 +22,11 @@ CARDS=[
       rows=[["方偉時間"],["5 小時前"],[]], href="/watch?v=e7", expect="show", why="側欄會員、末列空陣列，時間仍須解析正確"),
  dict(id="side-old", bare=True, ct="LOCKUP_CONTENT_TYPE_VIDEO", badge="DEFAULT",
       rows=[["某頻道"],["123","2 年前"],[]], href="/watch?v=e8", expect="hide", why="側欄舊片 → 驗證播放頁過濾生效"),
+ # 語言綁定回歸：頁面語言為日文時，時間過濾仍須生效（面板語言是另一回事）
+ dict(id="ja-old",    bare=False, ct="LOCKUP_CONTENT_TYPE_VIDEO", badge="DEFAULT",
+      rows=[["チャンネル","5000","3 か月前"]], href="/watch?v=j1", expect="hide", why="日文頁面：3 か月前 > 門檻"),
+ dict(id="ja-new",    bare=False, ct="LOCKUP_CONTENT_TYPE_VIDEO", badge="DEFAULT",
+      rows=[["チャンネル","3013","1 時間前"]], href="/watch?v=j2", expect="show", why="日文頁面：1 時間前，未超門檻"),
  dict(id="podcast", bare=False, ct="LOCKUP_CONTENT_TYPE_PODCAST", badge=None,
       rows=[["某頻道","1 小時前"]], href="/watch?v=e9", expect="hide", why="Podcast 列舉值"),
 ]
@@ -37,7 +42,8 @@ def mk(c):
     if not c["bare"]: el='<ytd-rich-item-renderer>%s</ytd-rich-item-renderer>'%el
     return el, "document.getElementById('%s').rawProps={data:()=>(%s)};"%(c["id"],data)
 els,js=zip(*[mk(c) for c in CARDS])
-html="<!doctype html><html lang='zh-TW'><body><ytd-browse></ytd-browse>%s<script>%s</script></body></html>"%("".join(els),"".join(js))
+LANG=__import__('os').environ.get('FIXLANG','zh-TW')
+html="<!doctype html><html lang='"+LANG+"'><body><ytd-browse></ytd-browse>%s<script>%s</script></body></html>"%("".join(els),"".join(js))
 open("fixture.html","w",encoding="utf-8").write(html)
 json.dump(CARDS,open("expect.json","w"),ensure_ascii=False,indent=1)
 print("已建立 fixture，卡片數:",len(CARDS))

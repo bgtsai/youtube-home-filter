@@ -163,6 +163,38 @@
   "why": "側欄舊片 → 驗證播放頁過濾生效"
  },
  {
+  "id": "ja-old",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "チャンネル",
+    "5000",
+    "3 か月前"
+   ]
+  ],
+  "href": "/watch?v=j1",
+  "expect": "hide",
+  "why": "日文頁面：3 か月前 > 門檻"
+ },
+ {
+  "id": "ja-new",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "チャンネル",
+    "3013",
+    "1 時間前"
+   ]
+  ],
+  "href": "/watch?v=j2",
+  "expect": "show",
+  "why": "日文頁面：1 時間前，未超門檻"
+ },
+ {
   "id": "podcast",
   "bare": false,
   "ct": "LOCKUP_CONTENT_TYPE_PODCAST",

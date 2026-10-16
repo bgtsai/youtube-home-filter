@@ -5,7 +5,7 @@ CARDS=json.load(open('expect.json'))
 CFG={"enabled":True,"hideOldEnabled":True,"value":2,"unit":"day",
      "hideLive":True,"hidePodcast":True,"hideMix":True,"hidePlaylist":False,
      "hideUpcoming":False,"hideMusic":False,"hideMember":False,"hideRegular":False,
-     "hideWatched":False,"hideTitleFilter":False,"lang":"zh-TW","theme":"dark",
+     "hideWatched":False,"hideTitleFilter":False,"lang":"en","theme":"dark",
      "whitelistMusic":[],"whitelistMember":[],"titleFilterList":[]}
 SHIM="""
 window.__store={'tm-yt-filter-cfg':%s};
@@ -14,7 +14,7 @@ window.GM_setValue=(k,v)=>{window.__store[k]=v;};
 window.GM_xmlhttpRequest=()=>{};window.unsafeWindow=window;
 window.__errs=[];window.addEventListener('error',e=>window.__errs.push(String(e.message)));
 """ % json.dumps(CFG)
-url="http://127.0.0.1:8731"
+url="http://127.0.0.1:8742"
 with sync_playwright() as p:
     b=p.chromium.launch(args=["--no-sandbox"]); ctx=b.new_context(locale="zh-TW",viewport={"width":1400,"height":900})
     ctx.add_init_script(SHIM); pg=ctx.new_page()
@@ -32,6 +32,9 @@ with sync_playwright() as p:
         for c in CARDS:
             if page=="/watch" and not c["bare"]: continue
             if page=="/" and c["bare"]: continue
+            import os
+            ja = c["id"].startswith("ja-")
+            if ja != (os.environ.get("FIXLANG")=="ja"): continue
             got=st["st"].get(c["id"])
             good = got==c["expect"]
             ok,fail=(ok+1,fail) if good else (ok,fail+1)

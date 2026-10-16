@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Home Filter: Industrial Standard
 // @namespace    https://github.com/bgtsai/youtube-home-filter
-// @version      12.30.0
+// @version      12.31.0
 // @description  過濾 YouTube 首頁影片，支援多種影片類型、年齡、已看等條件，並提供白名單、快速回饋按鈕等功能。
 // @author       BGTsai, Gemini Vibe Coding
 // @match        https://www.youtube.com/*
@@ -198,26 +198,15 @@
             // --- Custom Language strings ---
             labelCustomLang     : 'Custom Language',
             labelCustomLangSub  : 'User-defined translations',
-            labelCustomMatch    : 'Custom Filter Keywords',
-            labelCustomMatchSub : 'Custom detection keywords for video types',
-            ckEditBtn           : 'Edit…',
             ckTitle             : '▶ Custom Filter Keywords',
             ckColCurrent        : 'Current rule',
             ckColCustom         : 'Custom keyword',
             ckNoticeHigh        : 'These keywords take priority over language defaults and custom language settings.',
-            ckBtnReset          : 'Reset All',
-            ckBtnImport         : 'Import',
-            ckBtnExport         : 'Export',
-            ckBtnCancel         : 'Cancel',
-            ckBtnSave           : 'Save',
             ckPlaceholder       : 'Leave empty to use default',
             ckImportTitle       : 'Keywords Imported',
             ckImportOkBtn       : 'OK',
             ckImportErrorTitle  : 'Import Failed',
             ckImportErrorDesc   : 'The file could not be read. Please check that it is a valid JSON keywords file.',
-            ckHelpTitle         : 'Keyword Format',
-            ckHelpClose         : 'Close',
-            ckHelpBody          : `Supports plain text or regex:\n· Plain text: podcast  (case-insensitive partial match)\n· Regex: /podcast|radio/i\n\nLeave a field empty to use the language default.\nThese settings override both built-in and custom language keywords.`,
             clTitle             : 'Custom Language Editor',
             clLangCodeLabel     : 'Language code',
             clLangCodePlaceholder: 'e.g. zh, ja, ko',
@@ -230,13 +219,6 @@
             clGroupUi           : 'Interface text',
             clGroupUiNote       : 'Labels and messages shown in the filter panel UI.',
             clGroupDetection    : 'Detection keywords',
-            clGroupDetectionNote: 'Lower priority than {link}.',
-            clGroupDetectionLink: 'Custom Filter Keywords',
-            clSwitchTitle       : 'Unsaved changes',
-            clSwitchDesc        : 'You have unsaved changes.\nSave before switching?',
-            clSwitchDiscard     : 'Discard & Switch',
-            clSwitchSave        : 'Save & Switch',
-            clSwitchCancel      : 'Cancel',
             clGroupUnitLabels   : 'Time unit labels',
             clGroupUnitLabelsNote: 'Display names for time units in the "Hide videos older than" dropdown.',
             clColRef            : 'English (reference)',
@@ -385,26 +367,15 @@
             // --- 自訂語系字串 ---
             labelCustomLang     : '自訂語系',
             labelCustomLangSub  : '使用者自訂介面翻譯',
-            labelCustomMatch    : '自訂 篩選字詞',
-            labelCustomMatchSub : '自訂 各影片類型的偵測關鍵字',
-            ckEditBtn           : '編輯…',
             ckTitle             : '▶ 自訂篩選字詞',
             ckColCurrent        : '目前套用的規則',
             ckColCustom         : '自訂字詞',
             ckNoticeHigh        : '此處設定的字詞優先權最高，會覆蓋語系內建及自訂語系的偵測關鍵字。',
-            ckBtnReset          : '重置全部',
-            ckBtnImport         : '匯入',
-            ckBtnExport         : '匯出',
-            ckBtnCancel         : '取消',
-            ckBtnSave           : '儲存',
             ckPlaceholder       : '留空則使用語系預設',
             ckImportTitle       : '字詞已匯入',
             ckImportOkBtn       : '確定',
             ckImportErrorTitle  : '匯入失敗',
             ckImportErrorDesc   : '無法讀取檔案，請確認這是有效的 JSON 字詞檔案。',
-            ckHelpTitle         : '字詞格式說明',
-            ckHelpClose         : '關閉',
-            ckHelpBody          : `支援純文字或正規表達式：\n· 純文字：podcast（不分大小寫的部分比對）\n· 正規表達式：/podcast|radio/i\n\n留空欄位表示沿用語系預設值。\n此設定的優先權高於內建語系及自訂語系的偵測關鍵字。`,
             clTitle             : '自訂語系編輯器',
             clLangCodeLabel     : '語言代號',
             clLangCodePlaceholder: '例如 zh、ja、ko',
@@ -417,13 +388,6 @@
             clGroupUi           : '介面文字',
             clGroupUiNote       : '篩選面板中顯示的標籤與訊息文字。',
             clGroupDetection    : '偵測關鍵字',
-            clGroupDetectionNote: '優先權低於「{link}」的設定。',
-            clGroupDetectionLink: '自訂 篩選字詞',
-            clSwitchTitle       : '尚未儲存',
-            clSwitchDesc        : '你有尚未儲存的修改。\n離開前是否要儲存？',
-            clSwitchDiscard     : '捨棄並前往',
-            clSwitchSave        : '儲存並前往',
-            clSwitchCancel      : '取消',
             clGroupUnitLabels   : '時間單位標籤',
             clGroupUnitLabelsNote: '「隱藏影片早於」下拉選單中的時間單位顯示名稱。',
             clColRef            : '英文（參考）',
@@ -813,8 +777,6 @@
         gridColumnsEnabled     : true,
         gridColumnsValue       : 4,
         useCustomLang          : false,
-        useCustomMatch         : false,
-        customMatchPatterns    : {}
     };
 
     let config             = { ...defaultConfig, ...GM_getValue(STORAGE_KEY_CFG, {}) };
@@ -835,7 +797,6 @@
     let tfEditIndex         = -1;   // -1 = 新增模式；≥0 = 正在編輯該索引的規則
     let lastCalculatedLang = null;
     let isCustomLangOpen  = false;
-    let isCustomMatchOpen = false;
 
     // 白名單 Set 快取，提供 O(1) 查找效能；每次 config 變更時重建
     let musicWhitelistSet  = new Set(config.whitelistMusic);
@@ -1459,15 +1420,6 @@
                 }
             }
         }
-        // 自訂篩選字詞覆蓋（最高優先）
-        if (config.useCustomMatch) {
-            const patterns = config.customMatchPatterns || {};
-            for (const key of MATCH_PATTERN_KEYS) {
-                if (patterns[key] && patterns[key].trim()) {
-                    result[key] = patterns[key].trim();
-                }
-            }
-        }
         return _resolveMsg(result);
     };
 
@@ -1478,7 +1430,7 @@
             if (typeof r[k] === 'string') r[k] = new RegExp(r[k], 'i');
         });
         // 重建 timeMatch（自訂語系或自訂篩選字詞覆蓋後要重建）
-        if (!r.timeMatch || config.useCustomLang || config.useCustomMatch) {
+        if (!r.timeMatch || config.useCustomLang) {
             r.timeMatch = new RegExp(
                 TIME_UNIT_KEYS.map(u => {
                     const m = r[`unit${u}Match`];
@@ -1490,13 +1442,8 @@
     }
 
     // 取得某個 match key 目前實際生效的字串（供面板左欄顯示）
-    // 優先序：useCustomMatch 自訂 > useCustomLang 自訂語系 > 內建語系
+    // 優先序：useCustomLang 自訂語系 > 內建語系
     function getEffectiveMatchStr(matchKey) {
-        // 1. useCustomMatch 自訂篩選字詞（最高優先）
-        if (config.useCustomMatch) {
-            const v = (config.customMatchPatterns || {})[matchKey];
-            if (v && v.trim()) return v.trim();
-        }
         // 2. useCustomLang 自訂語系
         if (config.useCustomLang) {
             const custom = getCustomLangMap();
@@ -2545,6 +2492,16 @@
     let _rtfTable = null;
     let _rtfTableLang = null;
 
+    // YouTube 內容的語言，與「面板介面語言」是兩件不同的事：
+    // getActiveLang() 回傳的是面板語言，只支援 LOCALES_MASTER 裡的語系（en/zh），
+    // 其餘一律 fallback 到 en——拿它去生成 Intl 樣板，日文頁面會生出英文樣板而全數比不中。
+    // Intl 本身支援所有語系，所以直接用頁面原始的語言標籤，不做比對也不 fallback。
+    function getContentLang() {
+        const raw = (document.documentElement.getAttribute('lang') || '').trim();
+        if (raw) return raw;                       // 'ja'、'pt-BR'、'th'…
+        return navigator.language || 'en';
+    }
+
     function buildRelativeTimeTable(lang) {
         const rows = [], seen = new Set();
         for (const [unit, sec] of RTF_UNITS) {
@@ -2568,8 +2525,19 @@
         return rows;
     }
 
+    // 類型過濾的關鍵字 fallback（僅在 rawProps.data() 取不到時走到）同樣該用頁面語言，
+    // 而不是面板語言——面板設成英文但 YouTube 是繁中時，用面板語言會整組比不中。
+    // 注意：手工關鍵字表只有 en/zh 兩份，所以頁面語言是其他語系時仍然無能為力；
+    // 真正的解法是查清楚那些取不到資料的卡片是什麼，而不是補更多語系的關鍵字。
+    function getContentMsg() {
+        const lang = getContentLang().toLowerCase();
+        const key = Object.keys(LOCALES_MASTER).find(k => lang.startsWith(k));
+        if (!key) return getMsg();          // 頁面語系沒有對應的關鍵字表，只能沿用面板語系
+        return _resolveMsg(Object.assign({}, LOCALES_MASTER[key]));
+    }
+
     function getRelativeTimeTable() {
-        const lang = getActiveLang ? getActiveLang() : (document.documentElement.lang || 'en');
+        const lang = getContentLang();
         if (_rtfTable && _rtfTableLang === lang) return _rtfTable;
         try { _rtfTable = buildRelativeTimeTable(lang); }
         catch (e) { _rtfTable = []; }
@@ -2668,7 +2636,7 @@
         }
 
         const isSettingsOpen = settings.style.display === "block" || qaSettingsPanel.style.display === "block";
-        const isFloatingPanel = whitelistPanel.style.display === "block" || watchedPanel.style.display === "block" || isCustomLangOpen || isCustomMatchOpen;
+        const isFloatingPanel = whitelistPanel.style.display === "block" || watchedPanel.style.display === "block" || isCustomLangOpen;
 
         // 白名單／已看影片／自訂語系編輯器 獨立浮動面板：隱藏膠囊
         if (isFloatingPanel) {
@@ -4208,52 +4176,8 @@
         }
 
         // ── 偵測是否有未儲存的變更 ────────────────────────────────────────────
-        function hasUnsavedChanges() {
-            const saved = parseCurrentLang();
-            let changed = false;
-            clList.querySelectorAll('.cl-row[data-key]').forEach(row => {
-                if (changed) return;
-                const key = row.dataset.key;
-                const cur = (row.querySelector('.cl-inp')?.value || '');
-                const savedVal = saved[key] || '';
-                if (cur !== savedVal) changed = true;
-            });
-            return changed;
-        }
 
         // ── 切換到自訂篩選字詞面板的確認對話框 ───────────────────────────────
-        function showSwitchDialog() {
-            document.getElementById('ytf-cl-switch-overlay')?.remove();
-            const ov = document.createElement('div');
-            ov.id = 'ytf-cl-switch-overlay';
-            ov.style.cssText = `position:fixed;inset:0;z-index:2147483649;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;`;
-            ov.innerHTML = _trustedHTML(`
-                <div style="border-radius:13px;overflow:hidden;border:1px solid ${tv('--t-panel-border')};background:${tv('--t-panel-bg')};box-shadow:0 10px 40px ${tv('--t-panel-shadow')};font-family:sans-serif;font-size:13px;color:${tv('--t-text-main')};width:300px;">
-                    <div style="background:${tv('--t-panel-bg')};border-bottom:1px solid ${tv('--t-divider')};padding:12px 16px 10px;">
-                        <div style="font-size:13px;font-weight:700;margin-bottom:5px;">${msg.clSwitchTitle}</div>
-                        <div style="font-size:11px;color:${tv('--t-text-main')};line-height:1.6;white-space:pre-wrap;">${msg.clSwitchDesc}</div>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:6px;padding:10px 14px 12px;background:${tv('--t-panel-bg')};">
-                        <button id="ytf-cls-save" style="width:100%;padding:7px;border-radius:7px;border:none;font-size:11.5px;font-weight:700;cursor:pointer;background:${tv('--t-switch-on')};color:${tv('--t-switch-on-text')||'#fff'};box-shadow:${tv('--t-primary-shadow')};transition:filter 0.15s;">${msg.clSwitchSave}</button>
-                        <button id="ytf-cls-discard" style="width:100%;padding:7px;border-radius:7px;font-size:11.5px;font-weight:600;cursor:pointer;background:${tv('--t-btn-bg')};border:1px solid ${tv('--t-input-border')};color:${tv('--t-btn-text')};transition:background 0.15s,color 0.15s;">${msg.clSwitchDiscard}</button>
-                        <button id="ytf-cls-cancel" style="width:100%;padding:7px;border-radius:7px;font-size:11.5px;font-weight:600;cursor:pointer;background:transparent;border:1px solid ${tv('--t-nav-color')};color:${tv('--t-nav-color')};transition:background 0.15s,color 0.15s;">${msg.clSwitchCancel}</button>
-                    </div>
-                </div>
-            `);
-            document.documentElement.appendChild(ov);
-
-            const doSwitch = () => { ov.remove(); closeEditor(); openCustomMatchEditor(); };
-
-            document.getElementById('ytf-cls-save').onclick = () => {
-                const langCode = document.getElementById('ytf-cl-langcode').value.trim();
-                GM_setValue(STORAGE_KEY_CUSTOM_LANG, serialise(langCode));
-                invalidateCustomLangCache();
-                buildTooltipCache();
-                doSwitch();
-            };
-            document.getElementById('ytf-cls-discard').onclick = doSwitch;
-            document.getElementById('ytf-cls-cancel').onclick  = () => ov.remove();
-        }
 
         // ── 取得目前參考語言的資料 ─────────────────────────────────────────────
         function getRefMap(refLangKey) {
@@ -4293,7 +4217,6 @@
         };
         const CL_GROUP_NOTE_KEYS = {
             ui         : 'clGroupUiNote',
-            detection  : 'clGroupDetectionNote',
             unitLabels : 'clGroupUnitLabelsNote',
         };
 
@@ -4319,14 +4242,10 @@
             const hdr = document.createElement('div');
             hdr.className = 'cl-row-hdr cl-g';
             const groupLabel = msg[CL_GROUP_LABEL_KEYS[group.groupKey]] || group.groupKey;
-            const noteKey    = { ui: 'clGroupUiNote', detection: 'clGroupDetectionNote', unitLabels: 'clGroupUnitLabelsNote' }[group.groupKey];
+            const noteKey    = { ui: 'clGroupUiNote', unitLabels: 'clGroupUnitLabelsNote' }[group.groupKey];
             let noteHtml = '';
             if (noteKey && msg[noteKey]) {
                 let rawNote = msg[noteKey];
-                if (group.groupKey === 'detection') {
-                    const linkHtml = `<a class="cl-group-link" id="ytf-cl-switch-to-ck" href="#">${msg.clGroupDetectionLink}</a>`;
-                    rawNote = rawNote.replace('{link}', linkHtml);
-                }
                 noteHtml = `<span class="cl-group-note">${rawNote}</span>`;
             }
             hdr.innerHTML = _trustedHTML(`
@@ -4417,18 +4336,6 @@
         });
 
         // ── 偵測關鍵字分組的連結：切換到自訂篩選字詞面板 ──────────────────────
-        const switchLink = document.getElementById('ytf-cl-switch-to-ck');
-        if (switchLink) {
-            switchLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (hasUnsavedChanges()) {
-                    showSwitchDialog();
-                } else {
-                    closeEditor();
-                    openCustomMatchEditor();
-                }
-            });
-        }
 
         // ── 搜尋 ──────────────────────────────────────────────────────────────
         const searchInp = document.getElementById('ytf-cl-search');
@@ -4588,484 +4495,6 @@
                 renderQASettingsPanel();
             }
         });
-    }
-
-    // ── 自訂篩選字詞面板 ────────────────────────────────────────────────────
-    function openCustomMatchEditor() {
-        document.getElementById('ytf-ck-overlay')?.remove();
-        document.getElementById('ytf-ck-style')?.remove();
-
-        const msg = getMsg();
-        const tv  = (k) => container.style.getPropertyValue(k).trim();
-        const isDarkTheme = getActivePanelThemeKey() !== 'light';
-
-        // ── 定義面板的列（match key → 類型顯示名稱）────────────────────────
-        const CK_ROWS = [
-            { key: 'liveMatch',           labelKey: 'optLive'     },
-            { key: 'podcastMatch',        labelKey: 'optPodcast'  },
-            { key: 'mixMatch',            labelKey: 'optMix'      },
-            { key: 'playlistMatch',       labelKey: 'optPlaylist' },
-            { key: 'unitSecondMatch',     labelKey: 'unitSecondLabel' },
-            { key: 'unitMinuteMatch',     labelKey: 'unitMinuteLabel' },
-            { key: 'unitHourMatch',       labelKey: 'unitHourLabel'   },
-            { key: 'unitDayMatch',        labelKey: 'unitDayLabel'    },
-            { key: 'unitWeekMatch',       labelKey: 'unitWeekLabel'   },
-            { key: 'unitMonthMatch',      labelKey: 'unitMonthLabel'  },
-            { key: 'unitYearMatch',       labelKey: 'unitYearLabel'   },
-        ];
-
-        const styleEl = document.createElement('style');
-        styleEl.id = 'ytf-ck-style';
-        styleEl.textContent = `
-            #ytf-ck-editor {
-                pointer-events:auto;position:absolute;
-                border-radius:14px;overflow:hidden;
-                border:1px solid ${tv('--t-panel-border')};
-                background:${tv('--t-panel-bg')};
-                box-shadow:0 10px 40px ${tv('--t-panel-shadow')};
-                font-family:sans-serif;font-size:13px;
-                color:${tv('--t-text-main')};
-                display:flex;flex-direction:column;
-                width:520px;min-width:420px;max-height:90vh;min-height:280px;
-                isolation:isolate;
-            }
-            #ytf-ck-resize-t, #ytf-ck-resize-b {
-                position:absolute;left:0;right:0;height:6px;cursor:ns-resize;z-index:10;
-            }
-            #ytf-ck-resize-t { top:-3px; }
-            #ytf-ck-resize-b { bottom:-3px; }
-            #ytf-ck-editor .ck-hdr {
-                background:${tv('--t-panel-bg')};
-                border-bottom:1px solid ${tv('--t-divider')};
-                font-size:12px;font-weight:700;color:${tv('--t-text-main')};
-                display:flex;align-items:stretch;height:44px;box-sizing:border-box;flex-shrink:0;
-                position:relative;z-index:1;will-change:transform;
-            }
-            #ytf-ck-editor .ck-hdr-title {
-                flex:1;display:flex;align-items:center;padding:0 15px;cursor:move;user-select:none;
-            }
-            #ytf-ck-editor .ck-hdr-div { width:1px;background:${tv('--t-divider')};flex-shrink:0; }
-            #ytf-ck-editor .ck-hdr-close {
-                width:44px;border-radius:0 14px 0 0;border:none;
-                background:transparent;color:${tv('--t-text-muted')};
-                font-size:14px;cursor:pointer;flex-shrink:0;
-                display:flex;align-items:center;justify-content:center;
-                transition:background 0.15s,color 0.15s;
-            }
-            #ytf-ck-editor .ck-hdr-close:hover { background:${tv('--t-close-hover-bg')};color:${tv('--t-text-main')}; }
-            #ytf-ck-editor .ck-notice {
-                padding:8px 15px;font-size:11px;
-                color:${tv('--t-text-main')};
-                background:${tv('--t-panel-bg')};
-                border-bottom:1px solid ${tv('--t-divider')};
-                flex-shrink:0;line-height:1.5;
-                position:relative;z-index:1;will-change:transform;
-            }
-            #ytf-ck-editor .ck-notice strong { color:${tv('--t-switch-on')}; }
-            /* grid: num(28px) gap(8px) type-label(120px) gap(8px) current(1fr) gap(8px) custom(1fr) scroll(8px) */
-            #ytf-ck-editor .ck-g {
-                display:grid;
-                grid-template-columns:28px 8px var(--ck-type-col-w,120px) 8px var(--ck-content-col-w,160px) 8px var(--ck-content-col-w,160px) 8px;
-                padding:0 15px;box-sizing:border-box;
-            }
-            #ytf-ck-editor .ck-col-headers {
-                background:${tv('--t-panel-bg')};
-                padding-top:5px;padding-bottom:4px;
-                border-bottom:1px solid ${tv('--t-divider')};flex-shrink:0;
-                font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
-                position:relative;z-index:1;will-change:transform;
-            }
-            #ytf-ck-editor .ck-col-num { color:${tv('--t-text-main')};text-align:right; }
-            #ytf-ck-editor .ck-col-type { color:${tv('--t-text-main')}; white-space:nowrap; }
-            #ytf-ck-editor .ck-col-cur { color:${tv('--t-text-main')}; }
-            #ytf-ck-editor .ck-col-cust { color:${tv('--t-text-main')}; font-weight:700; }
-            #ytf-ck-editor .ck-badge {
-                display:inline-block;font-size:8px;padding:1px 4px;
-                border-radius:3px;margin-left:4px;vertical-align:middle;
-            }
-            #ytf-ck-editor .ck-badge-r {
-                background:${isDarkTheme?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.05)'};
-                color:${tv('--t-text-muted')};border:1px solid ${tv('--t-divider')};
-            }
-            #ytf-ck-editor .ck-badge-e {
-                background:${tv('--t-switch-on')}22;color:${tv('--t-switch-on')};
-                border:1px solid ${tv('--t-switch-on')}55;
-            }
-            #ytf-ck-editor .ck-list {
-                overflow-y:scroll;scrollbar-gutter:stable;
-                overflow-x:hidden;padding:4px 0;flex:1;min-height:0;
-                overscroll-behavior:contain;
-            }
-            #ytf-ck-editor .ck-list::-webkit-scrollbar { width:4px; }
-            #ytf-ck-editor .ck-list::-webkit-scrollbar-thumb { background:${tv('--t-pill-border')};border-radius:4px; }
-            #ytf-ck-editor .ck-row {
-                padding-top:5px;padding-bottom:5px;
-                border-bottom:1px solid ${tv('--t-card-divider')};
-                align-items:center;
-            }
-            #ytf-ck-editor .ck-num {
-                font-size:10px;color:${tv('--t-text-main')};font-variant-numeric:tabular-nums;text-align:right;
-            }
-            #ytf-ck-editor .ck-type-cell {
-                font-size:11px;color:${tv('--t-text-main')};white-space:nowrap;
-            }
-            #ytf-ck-editor .ck-cur-cell {
-                font-size:11px;color:${tv('--t-text-main')};
-                background:${isDarkTheme?'rgba(255,255,255,0.04)':'rgba(0,0,0,0.03)'};
-                border:1px solid ${tv('--t-input-border')};border-radius:5px;
-                padding:3px 7px;min-width:0;box-sizing:border-box;
-                font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-            }
-            #ytf-ck-editor .ck-inp-wrap { position:relative;min-width:0; }
-            #ytf-ck-editor .ck-inp {
-                width:100%;border-radius:5px;padding:3px 24px 3px 7px;font-size:11px;
-                outline:none;min-width:0;
-                background:${tv('--t-input-bg')};
-                border:1px solid ${tv('--t-input-border')};
-                color:${tv('--t-input-text')};
-                transition:border-color 0.15s;box-sizing:border-box;
-                font-family:monospace;
-            }
-            #ytf-ck-editor .ck-inp:focus { border-color:${tv('--t-switch-on')}; }
-            #ytf-ck-editor .ck-inp::placeholder { color:${tv('--t-text-muted')};opacity:0.5;font-family:sans-serif; }
-            #ytf-ck-editor .ck-inp-clear {
-                position:absolute;right:4px;top:50%;transform:translateY(-50%);
-                width:16px;height:16px;border:none;background:transparent;
-                color:${tv('--t-text-muted')};font-size:13px;cursor:pointer;
-                display:flex;align-items:center;justify-content:center;
-                opacity:0;transition:opacity 0.15s;padding:0;
-            }
-            #ytf-ck-editor .ck-inp-wrap:hover .ck-inp-clear,
-            #ytf-ck-editor .ck-inp:focus ~ .ck-inp-clear { opacity:1; }
-            #ytf-ck-editor .ck-inp-clear:hover { color:${tv('--t-text-main')}; }
-            #ytf-ck-editor .ck-footer {
-                display:flex;align-items:center;gap:8px;
-                padding:10px 23px 12px 15px;
-                border-top:1px solid ${tv('--t-divider')};
-                background:${tv('--t-panel-bg')};flex-shrink:0;
-                position:relative;z-index:1;
-            }
-            #ytf-ck-editor .ck-btn {
-                padding:5px 12px;border-radius:7px;border:none;
-                font-size:11.5px;font-weight:600;cursor:pointer;
-                display:flex;align-items:center;justify-content:center;
-                transition:background 0.15s,color 0.15s;
-            }
-            #ytf-ck-editor .ck-btn:active { opacity:0.82; }
-            #ytf-ck-editor .ck-btn-reset {
-                background:${tv('--t-danger-bg')};
-                border:1px solid ${tv('--t-danger-border')};
-                color:${tv('--t-danger-text')};
-            }
-            #ytf-ck-editor .ck-btn-reset:hover {
-                background:${tv('--t-danger-hover-bg')};
-                border-color:${tv('--t-danger-hover-border')};
-            }
-            #ytf-ck-editor .ck-btn-secondary {
-                background:${tv('--t-btn-bg')};border:1px solid ${tv('--t-input-border')};
-                color:${tv('--t-btn-text')};
-            }
-            #ytf-ck-editor .ck-btn-secondary:hover {
-                background:${tv('--t-btn-hover')};color:${tv('--t-btn-text-hover')};
-            }
-            #ytf-ck-editor .ck-btn-save {
-                background:${tv('--t-switch-on')};color:${tv('--t-switch-on-text')||'#fff'};
-                border:none;font-weight:700;
-                transition:filter 0.15s,box-shadow 0.15s;
-                box-shadow:${tv('--t-primary-shadow')};
-            }
-            #ytf-ck-editor .ck-btn-save:hover { filter:brightness(1.12);box-shadow:${tv('--t-primary-hover-shadow')}; }
-        `;
-        document.head.appendChild(styleEl);
-
-        const ckOverlay = document.createElement('div');
-        ckOverlay.id = 'ytf-ck-overlay';
-        ckOverlay.style.cssText = 'position:fixed;inset:0;z-index:2147483648;background:transparent;pointer-events:none;transform:translateZ(0);';
-        ckOverlay.innerHTML = _trustedHTML(`
-            <div id="ytf-ck-editor">
-                <div id="ytf-ck-resize-t"></div>
-                <div class="ck-hdr">
-                    <span class="ck-hdr-title" id="ytf-ck-title-handle">${msg.ckTitle}</span>
-                    <div class="ck-hdr-div"></div>
-                    <button class="ck-hdr-close" id="ytf-ck-close">✕</button>
-                </div>
-                <div class="ck-notice">⚡ ${msg.ckNoticeHigh}</div>
-                <div class="ck-g ck-col-headers">
-                    <div class="ck-col-num">#</div><div></div>
-                    <div class="ck-col-type">類型</div><div></div>
-                    <div class="ck-col-cur">目前套用 <span class="ck-badge ck-badge-r">唯讀</span></div>
-                    <div></div>
-                    <div class="ck-col-cust">自訂字詞 <span class="ck-badge ck-badge-e">優先套用</span></div>
-                    <div></div>
-                </div>
-                <div class="ck-list" id="ytf-ck-list"></div>
-                <div class="ck-footer">
-                    <button class="ck-btn ck-btn-reset" id="ytf-ck-reset">${msg.ckBtnReset}</button>
-                    <span style="flex:1"></span>
-                    <label class="ck-btn ck-btn-secondary" style="cursor:pointer;">
-                        ${msg.ckBtnImport}
-                        <input type="file" accept=".json" id="ytf-ck-file-inp" style="display:none">
-                    </label>
-                    <button class="ck-btn ck-btn-secondary" id="ytf-ck-export">${msg.ckBtnExport}</button>
-                    <span style="flex:1"></span>
-                    <button class="ck-btn ck-btn-secondary" id="ytf-ck-cancel">${msg.ckBtnCancel}</button>
-                    <button class="ck-btn ck-btn-save" id="ytf-ck-save">${msg.ckBtnSave}</button>
-                </div>
-                <div id="ytf-ck-resize-b"></div>
-            </div>
-        `);
-        document.documentElement.appendChild(ckOverlay);
-
-        const prevPanel = qaSettingsPanel.style.display === 'block' ? qaSettingsPanel : settings;
-        isCustomMatchOpen = true;
-        settings.style.display = 'none';
-        qaSettingsPanel.style.display = 'none';
-        host.style.display = 'none';
-
-        const ckEditor = document.getElementById('ytf-ck-editor');
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-            const saved = GM_getValue(STORAGE_KEY_POS_CK, null);
-            if (saved) {
-                ckEditor.style.left = saved.left + 'px';
-                ckEditor.style.top  = saved.top  + 'px';
-                if (saved.height) ckEditor.style.height = Math.min(window.innerHeight * 0.9, Math.max(280, saved.height)) + 'px';
-            } else {
-                ckEditor.style.height = '480px';
-                const w = ckEditor.offsetWidth  || 520;
-                const h = ckEditor.offsetHeight || 480;
-                ckEditor.style.left = Math.max(0, (window.innerWidth  - w) / 2) + 'px';
-                ckEditor.style.top  = Math.max(0, (window.innerHeight - h) / 2) + 'px';
-            }
-            ckEditor.style.transform = 'none';
-        }));
-
-        makeDraggable(ckEditor, document.getElementById('ytf-ck-title-handle'));
-
-        // 防止 wheel 事件冒泡到頁面
-        ckEditor.addEventListener('wheel', (e) => e.stopPropagation(), { passive: true });
-
-        // 可調整高度
-        const MIN_H = 280, MAX_H = () => window.innerHeight * 0.9;
-        function makeResizable(handle, isTop) {
-            handle.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                const startY = e.clientY, startH = ckEditor.offsetHeight, startTop = ckEditor.offsetTop;
-                document.body.style.cursor = 'ns-resize';
-                function onMove(e) {
-                    const dy = e.clientY - startY;
-                    if (isTop) {
-                        const newH = Math.min(MAX_H(), Math.max(MIN_H, startH - dy));
-                        ckEditor.style.height = newH + 'px';
-                        ckEditor.style.top = Math.max(0, startTop + (startH - newH)) + 'px';
-                    } else {
-                        ckEditor.style.height = Math.min(MAX_H(), Math.max(MIN_H, startH + dy)) + 'px';
-                    }
-                }
-                function onUp() { document.body.style.cursor = ''; document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp); }
-                document.addEventListener('mousemove', onMove);
-                document.addEventListener('mouseup', onUp);
-            });
-        }
-        makeResizable(document.getElementById('ytf-ck-resize-t'), true);
-        makeResizable(document.getElementById('ytf-ck-resize-b'), false);
-
-        const ckList = document.getElementById('ytf-ck-list');
-        const patterns = Object.assign({}, config.customMatchPatterns || {});
-
-        // 填入列表
-        CK_ROWS.forEach(({ key, labelKey }, i) => {
-            const row = document.createElement('div');
-            row.className = 'ck-row ck-g';
-            row.dataset.key = key;
-            const num      = String(i + 1).padStart(2, '0');
-            const typeLabel = msg[labelKey] || key;
-            const currentVal = getEffectiveMatchStr(key);
-            const customVal  = patterns[key] || '';
-            row.innerHTML = _trustedHTML(`
-                <span class="ck-num">${num}</span>
-                <div></div>
-                <div class="ck-type-cell">${typeLabel}</div>
-                <div></div>
-                <div class="ck-cur-cell"></div>
-                <div></div>
-                <div class="ck-inp-wrap">
-                    <input class="ck-inp" type="text" spellcheck="false"
-                           placeholder="${msg.ckPlaceholder}">
-                    <button class="ck-inp-clear" tabindex="-1">✕</button>
-                </div>
-                <div></div>
-            `);
-            row.querySelector('.ck-cur-cell').textContent = currentVal;
-            const inp = row.querySelector('.ck-inp');
-            inp.value = customVal;
-            row.querySelector('.ck-inp-clear').addEventListener('click', () => { inp.value = ''; inp.focus(); });
-            ckList.appendChild(row);
-        });
-
-        // ── 自動計算面板寬度 ──────────────────────────────────────────────────
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-            const ruler = document.createElement('div');
-            ruler.style.cssText = 'position:fixed;visibility:hidden;pointer-events:none;white-space:nowrap;left:-9999px;top:-9999px;';
-            document.body.appendChild(ruler);
-
-            // 量 type 欄（11px sans-serif）：type-cell 文字
-            ruler.style.fontSize = '11px';
-            ruler.style.fontFamily = 'sans-serif';
-            ruler.style.fontWeight = 'normal';
-            let maxTypeW = 0;
-            ckList.querySelectorAll('.ck-type-cell').forEach(el => {
-                ruler.textContent = el.textContent;
-                maxTypeW = Math.max(maxTypeW, ruler.offsetWidth);
-            });
-
-            // 量內容欄：欄標題文字（9px sans-serif）、cur-cell（11px monospace）、placeholder（11px sans-serif）、inp值（11px monospace）
-            // 欄標題
-            ruler.style.fontSize = '9px';
-            ruler.style.fontFamily = 'sans-serif';
-            ruler.style.letterSpacing = '1.5px';
-            ruler.style.textTransform = 'uppercase';
-            const hdrCur  = document.querySelector('#ytf-ck-editor .ck-col-cur');
-            const hdrCust = document.querySelector('#ytf-ck-editor .ck-col-cust');
-            ruler.textContent = hdrCur  ? hdrCur.textContent  : '目前套用 唯讀';
-            let maxContentW = ruler.offsetWidth;
-            ruler.textContent = hdrCust ? hdrCust.textContent : '自訂字詞 優先套用';
-            maxContentW = Math.max(maxContentW, ruler.offsetWidth);
-
-            // 重設字型量其他元素
-            ruler.style.fontSize = '11px';
-            ruler.style.letterSpacing = '0';
-            ruler.style.textTransform = 'none';
-
-            ruler.style.fontFamily = 'monospace';
-            ckList.querySelectorAll('.ck-row[data-key]').forEach(row => {
-                // cur-cell 實際文字
-                ruler.textContent = row.querySelector('.ck-cur-cell')?.textContent || '';
-                maxContentW = Math.max(maxContentW, ruler.offsetWidth);
-                // inp 現有值
-                ruler.textContent = row.querySelector('.ck-inp')?.value || '';
-                maxContentW = Math.max(maxContentW, ruler.offsetWidth);
-            });
-
-            // placeholder 文字
-            ruler.style.fontFamily = 'sans-serif';
-            ruler.textContent = msg.ckPlaceholder || '';
-            maxContentW = Math.max(maxContentW, ruler.offsetWidth);
-
-            document.body.removeChild(ruler);
-
-            const typeColW    = Math.max(maxTypeW + 8, 80);
-            const contentColW = Math.max(maxContentW + 24, 120); // 24 = padding + clear btn
-            // grid: num(28)+gap(8)+type(typeColW)+gap(8)+cur(contentColW)+gap(8)+inp(contentColW)+scroll(8)+padding(30)
-            const totalW = 28 + 8 + typeColW + 8 + contentColW * 2 + 8 + 8 + 30;
-            const maxW   = window.innerWidth - 40;
-            const finalW = Math.min(Math.max(totalW, 420), maxW);
-            ckEditor.style.setProperty('--ck-type-col-w',    typeColW    + 'px');
-            ckEditor.style.setProperty('--ck-content-col-w', contentColW + 'px');
-            ckEditor.style.width = finalW + 'px';
-
-            if (!GM_getValue(STORAGE_KEY_POS_CK, null)) {
-                const h = ckEditor.offsetHeight || 480;
-                ckEditor.style.left = Math.max(0, (window.innerWidth  - finalW) / 2) + 'px';
-                ckEditor.style.top  = Math.max(0, (window.innerHeight - h) / 2) + 'px';
-            }
-        }));
-        const closeEditor = () => {
-            GM_setValue(STORAGE_KEY_POS_CK, { left: ckEditor.offsetLeft, top: ckEditor.offsetTop, height: ckEditor.offsetHeight });
-            ckOverlay.remove();
-            document.getElementById('ytf-ck-style')?.remove();
-            isCustomMatchOpen = false;
-            prevPanel.style.display = 'block';
-            host.style.display = 'block';
-            updateUI();
-        };
-        document.getElementById('ytf-ck-close').addEventListener('click', closeEditor);
-        document.getElementById('ytf-ck-cancel').addEventListener('click', closeEditor);
-        ckOverlay.addEventListener('click', (e) => { if (e.target === ckOverlay) closeEditor(); });
-
-        // 重置全部
-        document.getElementById('ytf-ck-reset').addEventListener('click', () => {
-            ckList.querySelectorAll('.ck-inp').forEach(inp => { inp.value = ''; });
-        });
-
-        // 儲存
-        document.getElementById('ytf-ck-save').addEventListener('click', () => {
-            const result = {};
-            ckList.querySelectorAll('.ck-row[data-key]').forEach(row => {
-                const v = row.querySelector('.ck-inp').value.trim();
-                if (v) result[row.dataset.key] = v;
-            });
-            config.customMatchPatterns = result;
-            GM_setValue(STORAGE_KEY_CFG, config);
-            closeEditor();
-            renderSettings();
-            renderQASettingsPanel();
-        });
-
-        // ── 匯出 ──────────────────────────────────────────────────────────────
-        document.getElementById('ytf-ck-export').addEventListener('click', () => {
-            const patterns = {};
-            ckList.querySelectorAll('.ck-row[data-key]').forEach(row => {
-                const v = row.querySelector('.ck-inp').value.trim();
-                if (v) patterns[row.dataset.key] = v;
-            });
-            const jsonStr = JSON.stringify({ version: 1, customMatchPatterns: patterns }, null, 2);
-            const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8' });
-            const url  = URL.createObjectURL(blob);
-            const a    = document.createElement('a');
-            a.href = url; a.download = 'ytf-custom-keywords.json';
-            document.body.appendChild(a); a.click();
-            setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 1000);
-        });
-
-        // ── 匯入 ──────────────────────────────────────────────────────────────
-        document.getElementById('ytf-ck-file-inp').addEventListener('change', function() {
-            const file = this.files && this.files[0];
-            if (!file) return;
-            this.value = '';
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                let data;
-                try { data = JSON.parse(ev.target.result); }
-                catch {
-                    showCkInfoDialog(msg.ckImportErrorTitle, msg.ckImportErrorDesc);
-                    return;
-                }
-                if (!data || typeof data.customMatchPatterns !== 'object' || Array.isArray(data.customMatchPatterns)) {
-                    showCkInfoDialog(msg.ckImportErrorTitle, msg.ckImportErrorDesc);
-                    return;
-                }
-                ckList.querySelectorAll('.ck-row[data-key]').forEach(row => {
-                    const key = row.dataset.key;
-                    if (data.customMatchPatterns[key] !== undefined) {
-                        row.querySelector('.ck-inp').value = data.customMatchPatterns[key];
-                    }
-                });
-                showCkInfoDialog(msg.ckImportTitle, '');
-            };
-            reader.readAsText(file, 'UTF-8');
-        });
-
-        function showCkInfoDialog(title, desc) {
-            const existing = document.getElementById('ytf-ck-info-overlay');
-            if (existing) existing.remove();
-            const ov = document.createElement('div');
-            ov.id = 'ytf-ck-info-overlay';
-            ov.style.cssText = 'position:fixed;inset:0;z-index:2147483649;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;';
-            ov.innerHTML = _trustedHTML(`
-                <div id="ytf-cl-confirm-dialog">
-                    <div class="cld-hdr">
-                        <div class="cld-title">${title}</div>
-                        ${desc ? `<div class="cld-desc">${desc}</div>` : ''}
-                    </div>
-                    <div class="cld-footer">
-                        <button class="cld-btn cld-btn-confirm" id="ytf-cki-ok">${msg.ckImportOkBtn}</button>
-                    </div>
-                </div>
-            `);
-            document.documentElement.appendChild(ov);
-            document.getElementById('ytf-cki-ok').addEventListener('click', () => ov.remove());
-            ov.addEventListener('click', (e) => { if (e.target === ov) ov.remove(); });
-        }
     }
 
     // ── 快速動作按鈕：InnerTube Context ──
@@ -5751,7 +5180,8 @@
 
         function processContent() {
         if (!isFilterablePage()) return;
-        const msg = getMsg();
+        // 過濾用的關鍵字 fallback 以「頁面語言」為準，與面板語言無關
+        const msg = getContentMsg();
         let hasChanged = false;
 
         // 重複影片過濾：每次掃描建立新的 Set，確保跨次掃描不互相干擾
@@ -6104,16 +5534,6 @@
                 <div class="panel-close-area" id="close-btn">${CLOSE_SVG}</div>
             </div>
             <div class="panel-body">
-                <div class="section section-tall">
-                    <div class="title" style="flex-direction:column;align-items:flex-start;gap:2px;margin-right:12px;">
-                        <span>${msg.labelCustomMatch}</span>
-                        <span style="font-size:10px;color:var(--t-text-muted);font-weight:normal;">${msg.labelCustomMatchSub}</span>
-                    </div>
-                    <div class="controls">
-                        <button class="cl-edit-btn" id="ck-edit-btn">${msg.ckEditBtn}</button>
-                        <label class="switch"><input type="checkbox" id="v-custom-match" ${config.useCustomMatch ? 'checked' : ''}><span class="slider"></span></label>
-                    </div>
-                </div>
                 <div class="hide-old-group">
                     <div class="hide-old-row1">
                         <div class="title">${msg.optHideOld}</div>
@@ -6234,14 +5654,6 @@
         shadow.getElementById('v-playlist').onchange = syncConfig;
         shadow.getElementById('v-watched').onchange = syncConfig;
         shadow.getElementById('v-titlefilter').onchange = syncConfig;
-        shadow.getElementById('v-custom-match').onchange = (e) => {
-            config.useCustomMatch = e.target.checked;
-            GM_setValue(STORAGE_KEY_CFG, config);
-        };
-        shadow.getElementById('ck-edit-btn').onclick = (e) => {
-            e.stopPropagation();
-            openCustomMatchEditor();
-        };
         settings.onclick = (e) => e.stopPropagation();
 
         shadow.getElementById('wl-music-btn').onclick = (e) => {
