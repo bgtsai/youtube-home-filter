@@ -163,6 +163,28 @@
   "why": "側欄舊片 → 驗證播放頁過濾生效"
  },
  {
+  "id": "ad-slot",
+  "bare": false,
+  "ad": true,
+  "ct": null,
+  "badge": null,
+  "rows": [],
+  "href": "https://www.googleadservices.com/pagead/aclk?x=1",
+  "expect": "hide",
+  "why": "廣告卡片（無 view-model 資料）"
+ },
+ {
+  "id": "ad-video",
+  "bare": false,
+  "ad": true,
+  "ct": null,
+  "badge": null,
+  "rows": [],
+  "href": "/watch?v=AKStsRwsCN0",
+  "expect": "hide",
+  "why": "贊助商影片廣告（同樣無資料）"
+ },
+ {
   "id": "ja-old",
   "bare": false,
   "ct": "LOCKUP_CONTENT_TYPE_VIDEO",

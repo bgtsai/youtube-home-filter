@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Home Filter: Industrial Standard
 // @namespace    https://github.com/bgtsai/youtube-home-filter
-// @version      12.32.0
+// @version      12.33.0
 // @description  過濾 YouTube 首頁影片，支援多種影片類型、年齡、已看等條件，並提供白名單、快速回饋按鈕等功能。
 // @author       BGTsai, Gemini Vibe Coding
 // @match        https://www.youtube.com/*
@@ -5133,16 +5133,22 @@
             const item = outer || lockup;
             const info = getLockupInfo(lockup);
 
-            // 取不到 view-model 資料的卡片一律跳過不過濾。實測這類卡片都是贊助商廣告
-            // （rawProps 存在但 rawProps.data 為 undefined，走的是另一套渲染），
-            // 而廣告本來就不該套用一般影片的過濾規則。
-            // 若未來出現「不是廣告卻讀不到資料」的卡片，下面這行會在 Console 留下線索。
+            // 取不到 view-model 資料的卡片一律隱藏。實測這類卡片都是贊助商廣告
+            // （rawProps 存在但 rawProps.data 為 undefined，走的是另一套渲染）。
+            // 廣告沒有 contentType／badgeStyle／時間可判斷，而且使用者不需要看到，
+            // 所以無條件隱藏，不另外開設定項。
+            // 風險：若未來出現「不是廣告卻讀不到資料」的卡片，它會被誤隱藏——
+            // 下面這行 console.debug 就是用來發現這種情況的（每張卡片只印一次）。
             if (!info) {
                 if (!lockup.dataset.ytfNoData) {
                     lockup.dataset.ytfNoData = '1';
-                    console.debug('[YTFilter] 無 view-model 資料，略過過濾：',
+                    console.debug('[YTFilter] 無 view-model 資料（視為廣告並隱藏）：',
                         lockup.querySelector('a[href]')?.getAttribute('href') || '(無連結)',
                         (lockup.innerText || '').replace(/\s+/g, ' ').slice(0, 40));
+                }
+                if (item.style.display !== 'none') {
+                    item.style.setProperty('display', 'none', 'important');
+                    hasChanged = true;
                 }
                 return;
             }
