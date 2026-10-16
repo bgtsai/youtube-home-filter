@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Home Filter: Industrial Standard
 // @namespace    https://github.com/bgtsai/youtube-home-filter
-// @version      12.31.0
+// @version      12.32.0
 // @description  過濾 YouTube 首頁影片，支援多種影片類型、年齡、已看等條件，並提供白名單、快速回饋按鈕等功能。
 // @author       BGTsai, Gemini Vibe Coding
 // @match        https://www.youtube.com/*
@@ -82,12 +82,11 @@
      *     這是顯示在語言選單裡的文字。
      *
      *   特殊鍵說明：
-     *   - `liveMatch` / `podcastMatch` / `mixMatch` / `playlistMatch`
-     *     以字串形式儲存（例如 `'watching'`、`'正在觀看'`），getMsg() 回傳前統一轉為 RegExp（加 i flag）。
-     *     請根據目標語言版本的 YouTube 介面實際出現的文字來撰寫。
-     *   - 時間單位以 flat key 儲存：`unitSecondLabel`/`unitSecondMatch`…`unitYearLabel`/`unitYearMatch`。
-     *     Match 同樣為字串，getMsg() 回傳前轉為 RegExp，並重建 `timeMatch`。
-     *     用來解析「3 天前」「2 週前」等時間文字，請同樣對應目標語言的 YouTube 介面。
+     *   - 這裡只放「面板介面」的文字，與過濾判斷無關。
+     *     影片類型靠 view-model 的 contentType／badgeStyle 列舉值判斷，
+     *     影片年齡靠 Intl.RelativeTimeFormat 依頁面語言自動生成樣板，
+     *     兩者都與語系表無關，所以新增語系時不需要（也沒有地方）填偵測關鍵字。
+     *   - 時間單位只需 `unitSecondLabel`…`unitYearLabel`，那是面板單位下拉選單的文字。
      *   - `qaNoticeWaited` 是一個函式：(s) => `...${s}...`，s 是秒數。
      *
      * ── 步驟二：在 THEMES_MASTER 的每個佈景主題新增 label ────────
@@ -277,17 +276,13 @@
                                      <code>/\\d{4}[-\\/]\\d{1,2}[-\\/]\\d{1,2}/</code><br>
                                      Hides titles containing a date like 2025-01-01.<br><br>
                                      ⚠ Rules with invalid regex syntax are ignored and shown with a warning.`,
-            liveMatch       : 'watching',
-            podcastMatch    : 'podcast',
-            mixMatch        : 'mix|and more',
-            playlistMatch   : 'playlist',
-            unitSecondLabel : 'Seconds',  unitSecondMatch : 'second',
-            unitMinuteLabel : 'Minutes',  unitMinuteMatch : 'minute',
-            unitHourLabel   : 'Hours',    unitHourMatch   : 'hour',
-            unitDayLabel    : 'Days',     unitDayMatch    : 'day',
-            unitWeekLabel   : 'Weeks',    unitWeekMatch   : 'week',
-            unitMonthLabel  : 'Months',   unitMonthMatch  : 'month',
-            unitYearLabel   : 'Years',    unitYearMatch   : 'year'
+            unitSecondLabel : 'Seconds',
+            unitMinuteLabel : 'Minutes',
+            unitHourLabel   : 'Hours',
+            unitDayLabel    : 'Days',
+            unitWeekLabel   : 'Weeks',
+            unitMonthLabel  : 'Months',
+            unitYearLabel   : 'Years'
         },
         zh: {
             langName        : "繁體中文",
@@ -446,17 +441,13 @@
                                      <code>/\\d{4}[-\\/]\\d{1,2}[-\\/]\\d{1,2}/</code><br>
                                      隱藏片名含類似日期（2025-01-01）格式的影片。<br><br>
                                      ⚠ 正規表達式格式有誤的規則會被略過並以警示標示。`,
-            liveMatch       : '正在觀看',
-            podcastMatch    : '播客|podcast',
-            mixMatch        : '合輯|和其他藝人',
-            playlistMatch   : '播放清單',
-            unitSecondLabel : '秒',    unitSecondMatch : '秒',
-            unitMinuteLabel : '分鐘',  unitMinuteMatch : '分',
-            unitHourLabel   : '小時',  unitHourMatch   : '小時',
-            unitDayLabel    : '天',    unitDayMatch    : '天|日',
-            unitWeekLabel   : '週',    unitWeekMatch   : '週|周',
-            unitMonthLabel  : '月',    unitMonthMatch  : '月',
-            unitYearLabel   : '年',    unitYearMatch   : '年'
+            unitSecondLabel : '秒',
+            unitMinuteLabel : '分鐘',
+            unitHourLabel   : '小時',
+            unitDayLabel    : '天',
+            unitWeekLabel   : '週',
+            unitMonthLabel  : '月',
+            unitYearLabel   : '年'
         }
     };
 
@@ -680,7 +671,6 @@
     // 過濾掃描的實際對象：首頁的 lockup 在 ytd-rich-item-renderer 內層，播放頁側欄則是裸的
     // lockup（class 含 ytLockupViewModelWrapper）。改抓內層即可兩邊共用同一套過濾邏輯。
     const LOCKUP_SELECTOR  = "yt-lockup-view-model";
-    const TIME_SELECTOR    = "yt-content-metadata-view-model span, .inline-metadata-item, #metadata-line span";
 
     /* ============================================================
      * [YouTube DOM 選擇器集中管理]
@@ -808,14 +798,6 @@
     let processTimer       = null;
 
     const TIME_UNIT_KEYS = ['Second','Minute','Hour','Day','Week','Month','Year'];
-
-    Object.keys(LOCALES_MASTER).forEach(langKey => {
-        const d = LOCALES_MASTER[langKey];
-        if (!d.unitSecondMatch) return; // auto entry has no units
-        d.timeMatch = new RegExp(
-            TIME_UNIT_KEYS.map(u => d[`unit${u}Match`]).filter(Boolean).join('|')
-        );
-    });
 
     const isHomePage    = () => window.location.pathname === '/' || window.location.pathname === '/index';
     // 播放頁：右側推薦清單同樣套用過濾（結構與首頁相同，只是沒有 ytd-rich-item-renderer 外層）
@@ -1380,20 +1362,8 @@
     // 僅限純字串 key 可被自訂語系覆蓋（排除 RegExp、Function、Object 等複合型態）
     const CL_EDITABLE_KEYS = Object.keys(LOCALES_MASTER.en).filter(k => typeof LOCALES_MASTER.en[k] === 'string');
 
-    const MATCH_PATTERN_KEYS = [
-        'liveMatch','podcastMatch','mixMatch','playlistMatch',
-        ...TIME_UNIT_KEYS.map(u => `unit${u}Match`)
-    ];
-
     // 自訂語系編輯器分組定義（決定分組標題與顯示順序）
     const CL_KEY_GROUPS = [
-        {
-            groupKey: 'detection',
-            keys: [
-                'liveMatch','podcastMatch','mixMatch','playlistMatch',
-                ...TIME_UNIT_KEYS.map(u => `unit${u}Match`)
-            ].filter(k => CL_EDITABLE_KEYS.includes(k))
-        },
         {
             groupKey: 'unitLabels',
             keys: TIME_UNIT_KEYS.map(u => `unit${u}Label`)
@@ -1401,10 +1371,7 @@
         },
         {
             groupKey: 'ui',
-            keys: CL_EDITABLE_KEYS.filter(k =>
-                !MATCH_PATTERN_KEYS.includes(k) &&
-                !k.startsWith('unit')
-            )
+            keys: CL_EDITABLE_KEYS.filter(k => !k.startsWith('unit'))
         }
     ];
 
@@ -1420,26 +1387,9 @@
                 }
             }
         }
-        return _resolveMsg(result);
+        return result;
     };
 
-    // 把所有字串形式的 match pattern 轉成 RegExp，並重建 timeMatch
-    function _resolveMsg(obj) {
-        const r = Object.assign({}, obj);
-        MATCH_PATTERN_KEYS.forEach(k => {
-            if (typeof r[k] === 'string') r[k] = new RegExp(r[k], 'i');
-        });
-        // 重建 timeMatch（自訂語系或自訂篩選字詞覆蓋後要重建）
-        if (!r.timeMatch || config.useCustomLang) {
-            r.timeMatch = new RegExp(
-                TIME_UNIT_KEYS.map(u => {
-                    const m = r[`unit${u}Match`];
-                    return m instanceof RegExp ? m.source : (m || '');
-                }).filter(Boolean).join('|')
-            );
-        }
-        return r;
-    }
 
     // 取得某個 match key 目前實際生效的字串（供面板左欄顯示）
     // 優先序：useCustomLang 自訂語系 > 內建語系
@@ -2489,6 +2439,13 @@
     const RTF_PUNCT = /[.·،۔。．,’׳ʼ]/g;
     const rtfNorm = str => toAsciiDigits(str).replace(/\s+/g, '').replace(RTF_PUNCT, '').toLowerCase();
 
+    // Intl（CLDR）與 YouTube 實際用字不一致的例外表。
+    // 一次只收真正量測到差異的語系，不是預先鋪語系表——通則由 Intl 自動生成處理。
+    // bn：CLDR 寫 ঘন্টা（U+09A8），YouTube 寫 ঘণ্টা（U+09A3），差第二個字母。
+    const RTF_EXCEPTIONS = {
+        bn: [{ unit: 'hour', sec: 3600, frags: ['ঘণ্টা'] }]
+    };
+
     let _rtfTable = null;
     let _rtfTableLang = null;
 
@@ -2522,7 +2479,9 @@
         }
         // 由長到短排序：英文的「3m ago」(分) 與「3mo ago」(月) 必須先命中較長者
         rows.sort((a, b) => b.frags.join('').length - a.frags.join('').length);
-        return rows;
+        // 例外表放最前面，優先於自動生成的樣板
+        const exc = RTF_EXCEPTIONS[String(lang).toLowerCase().split('-')[0]];
+        return exc ? [...exc, ...rows] : rows;
     }
 
     // 類型過濾的關鍵字 fallback（僅在 rawProps.data() 取不到時走到）同樣該用頁面語言，
@@ -2533,7 +2492,7 @@
         const lang = getContentLang().toLowerCase();
         const key = Object.keys(LOCALES_MASTER).find(k => lang.startsWith(k));
         if (!key) return getMsg();          // 頁面語系沒有對應的關鍵字表，只能沿用面板語系
-        return _resolveMsg(Object.assign({}, LOCALES_MASTER[key]));
+        return Object.assign({}, LOCALES_MASTER[key]);
     }
 
     function getRelativeTimeTable() {
@@ -2560,27 +2519,6 @@
         return null;
     }
 
-    function shouldHideVideo(text, msg) {
-        if (!text || !config.enabled || !config.hideOldEnabled) return false;
-        const cleanText = text.toLowerCase().trim();
-
-        if (msg.timeMatch.test(cleanText) && /\d/.test(cleanText)) {
-            for (const unitKey of TIME_UNIT_KEYS) {
-                const matchRe = msg[`unit${unitKey}Match`];
-                if (!matchRe) continue;
-                const src   = matchRe instanceof RegExp ? matchRe.source : matchRe;
-                const regex = new RegExp(`(\\d+).*?(${src})`);
-                const match = cleanText.match(regex);
-                if (match) {
-                    const configKey    = unitKey.toLowerCase();
-                    const videoSeconds = parseFloat(match[1]) * UNIT_SECONDS[configKey];
-                    const thresholdSec = config.value * UNIT_SECONDS[config.unit];
-                    return videoSeconds > thresholdSec;
-                }
-            }
-        }
-        return false;
-    }
 
     function updateUI() {
         if (!isHomePage()) { host.style.display = "none"; return; }
@@ -5195,6 +5133,20 @@
             const item = outer || lockup;
             const info = getLockupInfo(lockup);
 
+            // 取不到 view-model 資料的卡片一律跳過不過濾。實測這類卡片都是贊助商廣告
+            // （rawProps 存在但 rawProps.data 為 undefined，走的是另一套渲染），
+            // 而廣告本來就不該套用一般影片的過濾規則。
+            // 若未來出現「不是廣告卻讀不到資料」的卡片，下面這行會在 Console 留下線索。
+            if (!info) {
+                if (!lockup.dataset.ytfNoData) {
+                    lockup.dataset.ytfNoData = '1';
+                    console.debug('[YTFilter] 無 view-model 資料，略過過濾：',
+                        lockup.querySelector('a[href]')?.getAttribute('href') || '(無連結)',
+                        (lockup.innerText || '').replace(/\s+/g, ' ').slice(0, 40));
+                }
+                return;
+            }
+
             // 正在顯示 QA 通知的卡片跳過過濾，避免 MutationObserver 觸發時錯誤隱藏
             if (item.querySelector('.qa-feedback-notice')) return;
 
@@ -5317,14 +5269,14 @@
 
             // 2. 文字比對（成本最低，優先執行）
             const cleanText = item.innerText.toLowerCase().trim();
-            // 類型判斷：優先用語言無關的列舉值（info），取不到資料時才退回關鍵字比對。
+            // 類型判斷：一律使用語言無關的列舉值。
             // 「正在直播」靠 badgeStyle 判斷，已結束的直播存檔徽章是時長而非 LIVE，
             // 因此不會被誤殺——這正是使用者要的語意（只擋正在播的）。
-            if (config.hideLive && (info ? info.isLive : msg.liveMatch.test(cleanText))) shouldBeHidden = true;
+            if (config.hideLive && info.isLive) shouldBeHidden = true;
             else if (config.hideUpcoming && item.querySelector(YT_SELECTORS.upcomingButton)) shouldBeHidden = true;
-            else if (config.hidePodcast  && (info ? info.isPodcast  : msg.podcastMatch.test(cleanText)))  shouldBeHidden = true;
-            else if (config.hideMix      && (info && info.contentType ? info.isMix      : msg.mixMatch.test(cleanText)))      shouldBeHidden = true;
-            else if (config.hidePlaylist && (info && info.contentType ? info.isPlaylist : msg.playlistMatch.test(cleanText))) shouldBeHidden = true;
+            else if (config.hidePodcast  && info.isPodcast)  shouldBeHidden = true;
+            else if (config.hideMix      && info.isMix)      shouldBeHidden = true;
+            else if (config.hidePlaylist && info.isPlaylist) shouldBeHidden = true;
 
             // 3. 音樂影片（DOM 查找 + 白名單）
             if (!shouldBeHidden && config.hideMusic) {
@@ -5346,11 +5298,11 @@
             // 一般影片 = 不是以下任何一種特殊類型：直播、待播、Podcast、合集混音、播放清單、音樂影片、會員限定
             if (!shouldBeHidden && config.hideRegular) {
                 const cleanTextR = item.innerText.toLowerCase().trim();
-                const isLive     = info ? info.isLive : msg.liveMatch.test(cleanTextR);
+                const isLive     = info.isLive;
                 const isUpcoming = !!item.querySelector(YT_SELECTORS.upcomingButton);
-                const isPodcast  = info ? info.isPodcast : msg.podcastMatch.test(cleanTextR);
-                const isMix      = (info && info.contentType) ? info.isMix      : msg.mixMatch.test(cleanTextR);
-                const isPlaylist = (info && info.contentType) ? info.isPlaylist : msg.playlistMatch.test(cleanTextR);
+                const isPodcast  = info.isPodcast;
+                const isMix      = info.isMix;
+                const isPlaylist = info.isPlaylist;
                 const isMusic    = !!item.querySelector(`path[d="${MUSIC_PATH_D}"]`);
                 const isMember   = !!item.querySelector(`path[d="${MEMBER_PATH_D}"]`);
                 const isSpecial  = isLive || isUpcoming || isPodcast || isMix || isPlaylist || isMusic || isMember;
@@ -5407,15 +5359,7 @@
                         if (sec !== null) { videoSeconds = sec; break; }
                     }
                 }
-                if (videoSeconds !== null) {
-                    if (videoSeconds > thresholdSec) shouldBeHidden = true;
-                } else if (!info) {
-                    // 取不到結構化資料時，退回既有的關鍵字比對路徑
-                    const labels = item.querySelectorAll(TIME_SELECTOR);
-                    for (let label of labels) {
-                        if (shouldHideVideo(label.textContent, msg)) { shouldBeHidden = true; break; }
-                    }
-                }
+                if (videoSeconds !== null && videoSeconds > thresholdSec) shouldBeHidden = true;
             }
 
             const isActuallyEmpty = item.innerText.trim() === "" && item.querySelectorAll('img').length === 0;
