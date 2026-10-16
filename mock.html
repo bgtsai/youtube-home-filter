@@ -1,0 +1,2283 @@
+<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><title>mock</title>
+<style>
+:root{--bg:#0f0f0f;--sk:#282828;--sk2:#1d1d1d;--line:#303030}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Roboto,Arial,sans-serif;color:#fff}
+@keyframes sh{0%,100%{opacity:.6}50%{opacity:.9}}
+.sk-bar{display:block;height:11px;border-radius:5px;background:var(--sk);animation:sh 2.6s infinite}
+.sk-sub{height:9px;background:var(--sk2);margin-top:8px}
+.sk-top{position:fixed;top:0;left:0;right:0;height:56px;background:var(--bg);display:flex;
+ align-items:center;gap:18px;padding:0 16px;z-index:5}
+.sk-burger{width:22px;height:16px;display:flex;flex-direction:column;justify-content:space-between}
+.sk-burger i{height:2px;background:#9a9a9a;border-radius:2px}
+.sk-logo{width:92px;height:20px;border-radius:4px;background:var(--sk)}
+.sk-search{flex:0 1 540px;height:38px;border:1px solid var(--line);border-radius:19px;margin:0 auto}
+.sk-ava-top{width:32px;height:32px;border-radius:50%;background:var(--sk)}
+.sk-side{position:fixed;top:56px;left:0;width:200px;bottom:0;padding:12px 10px;z-index:4}
+.sk-rail-item{display:flex;align-items:center;gap:14px;height:40px;padding:0 10px;border-radius:10px}
+.sk-dot{width:18px;height:18px;border-radius:5px;background:var(--sk);flex:none}
+.sk-main{margin:56px 0 0 200px;padding:24px}
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 16px}
+.sk-thumb{position:relative;aspect-ratio:16/9;border-radius:12px;background:var(--sk2);
+ display:flex;align-items:center;justify-content:center}
+.sk-img{width:100%;height:100%;object-fit:cover;border-radius:12px;display:block}
+.sk-dur{position:absolute;right:8px;bottom:8px;width:40px;height:16px;border-radius:4px;background:#000000aa}
+.sk-meta{display:flex;gap:12px;margin-top:12px;position:relative}
+.sk-avatar{width:36px;height:36px;border-radius:50%;background:var(--sk);flex:none;position:relative}
+.sk-text{flex:1;min-width:0}
+.sk-title{margin:0;display:flex;flex-direction:column;gap:8px;cursor:pointer}
+.sk-menu{opacity:0;transition:opacity .15s}
+.sk-item:hover .sk-menu{opacity:1}
+.sk-menu button{background:none;border:none;padding:4px;cursor:pointer}
+.sk-menu svg{width:20px;height:20px;fill:#aaa}
+</style></head><body>
+<div class="sk-top"><div class="sk-burger"><i></i><i></i><i></i></div><div class="sk-logo"></div>
+ <div class="sk-search"></div><div class="sk-ava-top"></div></div>
+<div class="sk-side"><div class="sk-rail-item"><span class="sk-dot"></span><span class="sk-bar" style="width:70%"></span></div><div class="sk-rail-item"><span class="sk-dot"></span><span class="sk-bar" style="width:55%"></span></div><div class="sk-rail-item"><span class="sk-dot"></span><span class="sk-bar" style="width:62%"></span></div><div class="sk-rail-item"><span class="sk-dot"></span><span class="sk-bar" style="width:48%"></span></div><div class="sk-rail-item"><span class="sk-dot"></span><span class="sk-bar" style="width:66%"></span></div><div class="sk-rail-item"><span class="sk-dot"></span><span class="sk-bar" style="width:52%"></span></div><div class="sk-rail-item"><span class="sk-dot"></span><span class="sk-bar" style="width:74%"></span></div><div class="sk-rail-item"><span class="sk-dot"></span><span class="sk-bar" style="width:58%"></span></div></div>
+<ytd-browse><div class="sk-main"><div class="sk-grid">
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c0" class="lockup">
+  <a href="/watch?v=mockvid00" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c1" class="lockup">
+  <a href="/watch?v=mockvid01" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c2" class="lockup">
+  <a href="/watch?v=mockvid02" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c3" class="lockup">
+  <a href="/watch?v=mockvid03" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c4" class="lockup">
+  <a href="/watch?v=mockvid04" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c5" class="lockup">
+  <a href="/watch?v=mockvid05" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c6" class="lockup">
+  <a href="/watch?v=mockvid06" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c7" class="lockup">
+  <a href="/watch?v=mockvid07" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c8" class="lockup">
+  <a href="/watch?v=mockvid08" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c9" class="lockup">
+  <a href="/watch?v=mockvid09" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c10" class="lockup">
+  <a href="/watch?v=mockvid10" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c11" class="lockup">
+  <a href="/watch?v=mockvid11" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c12" class="lockup">
+  <a href="/watch?v=mockvid12" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c13" class="lockup">
+  <a href="/watch?v=mockvid13" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c14" class="lockup">
+  <a href="/watch?v=mockvid14" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c15" class="lockup">
+  <a href="/watch?v=mockvid15" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c16" class="lockup">
+  <a href="/watch?v=mockvid16" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c17" class="lockup">
+  <a href="/watch?v=mockvid17" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c18" class="lockup">
+  <a href="/watch?v=mockvid18" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c19" class="lockup">
+  <a href="/watch?v=mockvid19" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c20" class="lockup">
+  <a href="/watch?v=mockvid20" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c21" class="lockup">
+  <a href="/watch?v=mockvid21" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c22" class="lockup">
+  <a href="/watch?v=mockvid22" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c23" class="lockup">
+  <a href="/watch?v=mockvid23" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c24" class="lockup">
+  <a href="/watch?v=mockvid24" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c25" class="lockup">
+  <a href="/watch?v=mockvid25" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c26" class="lockup">
+  <a href="/watch?v=mockvid26" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c27" class="lockup">
+  <a href="/watch?v=mockvid27" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c28" class="lockup">
+  <a href="/watch?v=mockvid28" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c29" class="lockup">
+  <a href="/watch?v=mockvid29" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c30" class="lockup">
+  <a href="/watch?v=mockvid30" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c31" class="lockup">
+  <a href="/watch?v=mockvid31" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c32" class="lockup">
+  <a href="/watch?v=mockvid32" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c33" class="lockup">
+  <a href="/watch?v=mockvid33" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c34" class="lockup">
+  <a href="/watch?v=mockvid34" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c35" class="lockup">
+  <a href="/watch?v=mockvid35" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c36" class="lockup">
+  <a href="/watch?v=mockvid36" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c37" class="lockup">
+  <a href="/watch?v=mockvid37" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c38" class="lockup">
+  <a href="/watch?v=mockvid38" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c39" class="lockup">
+  <a href="/watch?v=mockvid39" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c40" class="lockup">
+  <a href="/watch?v=mockvid40" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c41" class="lockup">
+  <a href="/watch?v=mockvid41" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c42" class="lockup">
+  <a href="/watch?v=mockvid42" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c43" class="lockup">
+  <a href="/watch?v=mockvid43" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c44" class="lockup">
+  <a href="/watch?v=mockvid44" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c45" class="lockup">
+  <a href="/watch?v=mockvid45" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c46" class="lockup">
+  <a href="/watch?v=mockvid46" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c47" class="lockup">
+  <a href="/watch?v=mockvid47" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c48" class="lockup">
+  <a href="/watch?v=mockvid48" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c49" class="lockup">
+  <a href="/watch?v=mockvid49" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c50" class="lockup">
+  <a href="/watch?v=mockvid50" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c51" class="lockup">
+  <a href="/watch?v=mockvid51" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c52" class="lockup">
+  <a href="/watch?v=mockvid52" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c53" class="lockup">
+  <a href="/watch?v=mockvid53" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c54" class="lockup">
+  <a href="/watch?v=mockvid54" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c55" class="lockup">
+  <a href="/watch?v=mockvid55" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c56" class="lockup">
+  <a href="/watch?v=mockvid56" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c57" class="lockup">
+  <a href="/watch?v=mockvid57" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c58" class="lockup">
+  <a href="/watch?v=mockvid58" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c59" class="lockup">
+  <a href="/watch?v=mockvid59" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c60" class="lockup">
+  <a href="/watch?v=mockvid60" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c61" class="lockup">
+  <a href="/watch?v=mockvid61" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c62" class="lockup">
+  <a href="/watch?v=mockvid62" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c63" class="lockup">
+  <a href="/watch?v=mockvid63" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c64" class="lockup">
+  <a href="/watch?v=mockvid64" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c65" class="lockup">
+  <a href="/watch?v=mockvid65" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c66" class="lockup">
+  <a href="/watch?v=mockvid66" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c67" class="lockup">
+  <a href="/watch?v=mockvid67" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c68" class="lockup">
+  <a href="/watch?v=mockvid68" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c69" class="lockup">
+  <a href="/watch?v=mockvid69" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c70" class="lockup">
+  <a href="/watch?v=mockvid70" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c71" class="lockup">
+  <a href="/watch?v=mockvid71" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c72" class="lockup">
+  <a href="/watch?v=mockvid72" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c73" class="lockup">
+  <a href="/watch?v=mockvid73" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c74" class="lockup">
+  <a href="/watch?v=mockvid74" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c75" class="lockup">
+  <a href="/watch?v=mockvid75" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c76" class="lockup">
+  <a href="/watch?v=mockvid76" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c77" class="lockup">
+  <a href="/watch?v=mockvid77" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c78" class="lockup">
+  <a href="/watch?v=mockvid78" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c79" class="lockup">
+  <a href="/watch?v=mockvid79" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c80" class="lockup">
+  <a href="/watch?v=mockvid80" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c81" class="lockup">
+  <a href="/watch?v=mockvid81" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c82" class="lockup">
+  <a href="/watch?v=mockvid82" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c83" class="lockup">
+  <a href="/watch?v=mockvid83" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c84" class="lockup">
+  <a href="/watch?v=mockvid84" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c85" class="lockup">
+  <a href="/watch?v=mockvid85" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c86" class="lockup">
+  <a href="/watch?v=mockvid86" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c87" class="lockup">
+  <a href="/watch?v=mockvid87" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c88" class="lockup">
+  <a href="/watch?v=mockvid88" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c89" class="lockup">
+  <a href="/watch?v=mockvid89" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c90" class="lockup">
+  <a href="/watch?v=mockvid90" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c91" class="lockup">
+  <a href="/watch?v=mockvid91" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c92" class="lockup">
+  <a href="/watch?v=mockvid92" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c93" class="lockup">
+  <a href="/watch?v=mockvid93" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c94" class="lockup">
+  <a href="/watch?v=mockvid94" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c95" class="lockup">
+  <a href="/watch?v=mockvid95" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c96" class="lockup">
+  <a href="/watch?v=mockvid96" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c97" class="lockup">
+  <a href="/watch?v=mockvid97" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c98" class="lockup">
+  <a href="/watch?v=mockvid98" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c99" class="lockup">
+  <a href="/watch?v=mockvid99" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:88%"></span>
+        <span class="sk-bar" style="width:45%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c100" class="lockup">
+  <a href="/watch?v=mockvid100" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer>
+<ytd-rich-item-renderer class="sk-item">
+ <yt-lockup-view-model id="c101" class="lockup">
+  <a href="/watch?v=mockvid101" class="sk-thumb">
+    <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
+    <span class="sk-dur"></span>
+  </a>
+  <yt-lockup-metadata-view-model class="sk-meta">
+    <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
+    <div class="sk-text">
+      <h3 class="ytLockupMetadataViewModelHeadingReset sk-title" title="███████████████ ████████ █████████████">
+        <span class="sk-bar" style="width:94%"></span>
+        <span class="sk-bar" style="width:61%"></span>
+      </h3>
+      <div class="sk-bar sk-sub" style="width:54%"></div>
+      <div class="sk-bar sk-sub" style="width:40%"></div>
+    </div>
+    <div class="ytLockupMetadataViewModelMenuButton sk-menu">
+      <button aria-label="menu"><svg viewBox="0 0 24 24"><path d="M12 4a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Zm0 6a2 2 0 100 4 2 2 0 000-4Z"/></svg></button>
+    </div>
+  </yt-lockup-metadata-view-model>
+ </yt-lockup-view-model>
+</ytd-rich-item-renderer></div></div></ytd-browse>
+<script>document.getElementById('c0').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 1"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c1').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 2"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c2').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 3"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c3').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 4"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c4').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 5"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c5').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 6"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c6').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 7"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c7').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 8"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c8').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 9"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c9').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 10"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c10').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 11"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c11').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 12"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c12').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 13"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c13').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 14"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c14').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 15"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c15').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 16"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c16').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 17"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c17').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 18"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c18').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 19"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c19').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 20"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c20').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 21"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c21').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 22"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c22').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 23"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c23').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 24"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c24').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 25"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c25').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 26"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c26').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 27"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c27').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 28"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c28').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 29"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c29').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 30"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c30').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 31"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c31').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 32"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c32').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 33"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c33').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 34"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c34').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 35"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c35').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 36"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c36').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 37"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c37').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 38"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c38').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 39"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c39').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 40"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c40').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 41"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c41').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 42"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c42').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 43"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c43').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 44"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c44').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 45"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c45').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 46"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c46').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 47"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c47').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 48"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c48').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 49"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c49').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 50"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c50').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 51"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c51').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 52"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c52').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 53"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c53').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 54"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c54').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 55"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c55').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 56"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c56').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 57"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c57').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 58"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c58').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 59"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c59').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 60"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c60').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 61"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c61').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 62"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c62').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 63"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c63').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 64"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c64').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 65"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c65').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 66"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c66').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 67"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c67').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 68"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c68').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 69"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c69').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 70"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c70').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 71"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c71').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 72"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c72').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 73"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c73').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 74"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c74').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 75"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c75').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 76"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c76').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 77"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c77').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 78"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c78').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 79"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c79').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 80"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c80').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 81"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c81').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 82"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c82').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 83"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c83').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 84"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c84').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 85"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c85').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 86"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c86').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 87"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c87').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 88"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c88').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 89"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c89').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 90"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c90').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 91"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c91').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 92"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c92').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 93"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c93').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 94"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};document.getElementById('c94').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 95"}}, {"text": {"content": "9 小時前"}}]}]}}}}})};document.getElementById('c95').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 96"}}, {"text": {"content": "4 小時前"}}]}]}}}}})};document.getElementById('c96').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 97"}}, {"text": {"content": "1 小時前"}}]}]}}}}})};document.getElementById('c97').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 98"}}, {"text": {"content": "3 小時前"}}]}]}}}}})};document.getElementById('c98').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 99"}}, {"text": {"content": "5 小時前"}}]}]}}}}})};document.getElementById('c99').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 100"}}, {"text": {"content": "8 小時前"}}]}]}}}}})};document.getElementById('c100').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 101"}}, {"text": {"content": "2 小時前"}}]}]}}}}})};document.getElementById('c101').rawProps={data:()=>({"contentType": "LOCKUP_CONTENT_TYPE_VIDEO", "contentImage": {"thumbnailViewModel": {"overlays": [{"thumbnailBottomOverlayViewModel": {"badges": [{"thumbnailBadgeViewModel": {"badgeStyle": "THUMBNAIL_OVERLAY_BADGE_STYLE_DEFAULT", "text": "12:34"}}]}}]}}, "metadata": {"lockupMetadataViewModel": {"title": {"content": " "}, "metadata": {"contentMetadataViewModel": {"metadataRows": [{"metadataParts": [{"text": {"content": "Channel 102"}}, {"text": {"content": "6 小時前"}}]}]}}}}})};</script>
+</body></html>
