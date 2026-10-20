@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Home Filter: Industrial Standard
 // @namespace    https://github.com/bgtsai/youtube-home-filter
-// @version      12.37.0
+// @version      12.38.0
 // @description  過濾 YouTube 首頁影片，支援多種影片類型、年齡、已看等條件，並提供白名單、快速回饋按鈕等功能。
 // @author       BGTsai, Gemini Vibe Coding
 // @match        https://www.youtube.com/*
@@ -4760,17 +4760,25 @@
     }
 
     // ── 建立或取得通知容器，同時隱藏卡片內容 ──
-    // ── 把佔位外框對齊到縮圖的實際方框 ──
-    // 佔位卡代表「影片原本在的位置」，所以範圍就是縮圖，不含底下的標題與頻道名。
-    // 一律量實際元素：首頁是直向卡（縮圖等寬、16:9），側欄是橫向卡（縮圖只占左半邊），
-    // 任何用比例推算的寫法都只會在其中一種版型成立。
+    // ── 決定佔位外框的範圍並對齊上去 ──
+    // 判準不是「佔位卡＝縮圖」，而是「佔位卡＝YouTube 自己在那個版面會換掉的範圍」：
+    //   直向卡（首頁）：原生只換掉縮圖那一塊，標題與頻道名留著 → 佔位卡只蓋縮圖
+    //   橫向卡（播放頁側欄）：原生把整張卡換成一塊提示 → 佔位卡蓋整張卡
+    // 用「縮圖寬度是不是幾乎等於卡片寬度」分辨版型，全程量實際元素，
+    // 不寫死任何尺寸、也不判斷目前在哪個頁面；YouTube 日後在別處放橫向卡也自動成立。
+    const THUMB_FULL_WIDTH_RATIO = 0.9;   // 縮圖寬 ≥ 卡片寬的九成即視為直向卡
+
     function placeNoticeFrame(item, frame) {
         const thumb = item.querySelector(YT_SELECTORS.thumbnail)
                    || item.querySelector(YT_SELECTORS.thumbnailFB);
-        if (!thumb) return;   // 量不到就維持 CSS 的 inset:0
+        if (!thumb) return;   // 量不到就維持 CSS 的 inset:0（蓋整張卡）
         const t = thumb.getBoundingClientRect();
         const i = item.getBoundingClientRect();
-        if (!t.width || !t.height) return;
+        if (!t.width || !t.height || !i.width) return;
+
+        const isVertical = t.width >= i.width * THUMB_FULL_WIDTH_RATIO;
+        if (!isVertical) return;   // 橫向卡：維持 inset:0，蓋住整張卡
+
         frame.style.left   = (t.left - i.left) + 'px';
         frame.style.top    = (t.top  - i.top)  + 'px';
         frame.style.width  = t.width  + 'px';
