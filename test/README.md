@@ -8,9 +8,15 @@ pip install playwright && playwright install chromium
 python3 fixture.py          # 產生 fixture.html
 python3 serve.py &          # 本機伺服器（需要 http:// 才能模擬 / 與 /watch 路徑）
 python3 run.py              # 執行測試
+
+FIXLANG=ja python3 fixture.py && FIXLANG=ja python3 run.py   # 換語系重測
 ```
 
-涵蓋 11 個案例，分別在模擬的首頁（`/`）與播放頁（`/watch`）執行：
+`serve.py` 每次請求都重讀 `fixture.html`，所以重新產生夾具後不必重啟；
+但**同一個連接埠只能有一支**，被占用時它會明確報錯退出（`FIXPORT=其他埠號` 可換埠）。
+看到「換了語系卻像沒生效」時，先確認服務你的不是一支還活著的舊 server。
+
+涵蓋 13 個案例，分別在模擬的首頁（`/`）與播放頁（`/watch`）執行：
 
 - 首頁格線卡片（有 `ytd-rich-item-renderer` 外層）與播放頁側欄卡片（裸 lockup）
 - 時間門檻：新片保留、舊片隱藏
