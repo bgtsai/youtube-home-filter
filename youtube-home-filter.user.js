@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Home Filter: Industrial Standard
 // @namespace    https://github.com/bgtsai/youtube-home-filter
-// @version      12.36.0
+// @version      12.37.0
 // @description  過濾 YouTube 首頁影片，支援多種影片類型、年齡、已看等條件，並提供白名單、快速回饋按鈕等功能。
 // @author       BGTsai, Gemini Vibe Coding
 // @match        https://www.youtube.com/*
@@ -189,7 +189,6 @@
             qaActDontLike   : "Don't like",
             qaActDontRec    : "Don't recommend channel",
             qaNoticeRemoved : "Video removed",
-            qaNoticePartial : "Removed, but the reason was not sent",
             qaNoticePending : "Processing",
             qaNoticeFailed  : "Failed",
             qaNoticeRetry   : "Retry",
@@ -350,7 +349,6 @@
             qaActDontLike   : "不喜歡",
             qaActDontRec    : "不要推薦此頻道",
             qaNoticeRemoved : "影片已移除",
-            qaNoticePartial : "已移除，但原因未送出",
             qaNoticePending : "處理中",
             qaNoticeFailed  : "傳送失敗",
             qaNoticeRetry   : "重試",
@@ -682,6 +680,9 @@
         browse            : 'ytd-browse',
         lockupViewModel   : 'yt-lockup-view-model',
         metadataViewModel : 'yt-lockup-metadata-view-model',
+        // 縮圖容器：佔位卡要蓋住的範圍就是它（量它的實際方框，不要推算比例）
+        thumbnail         : 'yt-thumbnail-view-model',
+        thumbnailFB       : '.ytLockupViewModelContentImage',
 
         // ── 標題 ────────────────────────────────────────────────
         // ⚠ YouTube 在 2025 年將 class 命名從 kebab-case 改為 camelCase，
@@ -1658,10 +1659,12 @@
             font-family: Roboto, "YouTube Sans", sans-serif;
         }
 
-        /* 佔位外框：直接等於卡片自己的方框。
-           不要用 aspect-ratio 推算尺寸——首頁卡片是直向的（卡片寬 = 縮圖寬），
-           16:9 碰巧貼齊縮圖；側欄卡片是橫向的（456×160，縮圖只占左邊 285），
-           同一條規則就算出 256px 高、超出卡片 96px。量出來的才對，推算的會錯。 */
+        /* 佔位外框：只蓋住「影片本來在的位置」，也就是縮圖那一塊，
+           下面的標題與頻道名不在範圍內（跟 YouTube 原生的移除提示一致）。
+           實際的 left/top/width/height 由 JS 量縮圖元素後寫上去——
+           不要用 aspect-ratio 推算：首頁卡片直向（卡片寬 = 縮圖寬）比例碰巧貼齊，
+           側欄卡片橫向（456×160，縮圖只占左邊 285）同一條規則就算出 256px 高。
+           量不到縮圖時才退回 inset:0。 */
         .qa-notice-frame {
             position: absolute;
             inset: 0;
@@ -1715,11 +1718,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* 置中＋固定間距，不用 space-evenly：佔位卡現在等於卡片本身的方框，
-               高度隨版型變動（首頁約 340px、側欄只有 160px），用均分會讓高卡片
-               的文字散得很開、矮卡片又擠在一起。置中在任何高度都成立。 */
-            justify-content: center;
-            gap: 8px;
+            /* 等距排版：上緣、動作名稱、訊息、復原鈕之間的空白一樣大 */
+            justify-content: space-evenly;
             padding: 12px 16px 0;
             width: 100%;
             box-sizing: border-box;
@@ -4546,11 +4546,12 @@
 
             const subToken = await waitForDismissalToken(index, 3000, before);
             if (!subToken) {
-                // 影片確實已被移除（步驟 1 成功），但「原因」沒送出去。
-                // 必須如實回報，不能當成完全成功——否則使用者會以為回饋已完整送達。
-                console.warn(`[YTFilter QA] ${key} subToken 取得失敗，原因未送出`);
+                // 影片確實已被移除（步驟 1 成功），只是「說明原因」那一段沒送出。
+                // 使用者是自己按下這顆按鈕的，知道自己送的是什麼，介面上不另外提示；
+                // 這行 warn 保留給診斷用。
+                console.warn(`[YTFilter QA] ${key} subToken 取得失敗，說明原因未送出`);
                 closeDismissalDialog();
-                return { undoToken: hideUndoToken, partial: true };
+                return { undoToken: hideUndoToken };
             }
             const resp2 = await sendFeedback(subToken);
             console.log(`[YTFilter QA] ${key} step2 isProcessed:`,
@@ -4759,6 +4760,25 @@
     }
 
     // ── 建立或取得通知容器，同時隱藏卡片內容 ──
+    // ── 把佔位外框對齊到縮圖的實際方框 ──
+    // 佔位卡代表「影片原本在的位置」，所以範圍就是縮圖，不含底下的標題與頻道名。
+    // 一律量實際元素：首頁是直向卡（縮圖等寬、16:9），側欄是橫向卡（縮圖只占左半邊），
+    // 任何用比例推算的寫法都只會在其中一種版型成立。
+    function placeNoticeFrame(item, frame) {
+        const thumb = item.querySelector(YT_SELECTORS.thumbnail)
+                   || item.querySelector(YT_SELECTORS.thumbnailFB);
+        if (!thumb) return;   // 量不到就維持 CSS 的 inset:0
+        const t = thumb.getBoundingClientRect();
+        const i = item.getBoundingClientRect();
+        if (!t.width || !t.height) return;
+        frame.style.left   = (t.left - i.left) + 'px';
+        frame.style.top    = (t.top  - i.top)  + 'px';
+        frame.style.width  = t.width  + 'px';
+        frame.style.height = t.height + 'px';
+        frame.style.right  = 'auto';
+        frame.style.bottom = 'auto';
+    }
+
     function getOrCreateNotice(item) {
         item.style.position = 'relative';
 
@@ -4779,6 +4799,7 @@
             notice.className = 'qa-feedback-notice';
             const frame = document.createElement('div');
             frame.className = 'qa-notice-frame';
+            placeNoticeFrame(item, frame);
             notice.appendChild(frame);
             // 先插入 notice（佔位），再隱藏 innerContent，避免高度空窗閃動
             item.appendChild(notice);
@@ -4872,14 +4893,6 @@
             btn.disabled = false;
             btn.style.visibility = undoToken ? '' : 'hidden';
             if (undoToken && onUndo) btn._listenerRef.fn = onUndo;
-        } else if (state === 'partial') {
-            // 兩段式流程只成功了第一段：影片確實被移除，但「原因」沒送出去。
-            // 這種情況不能顯示成完全成功，否則使用者會以為回饋已完整送達。
-            msgEl.textContent = msg.qaNoticePartial;
-            setBtnText(msg.qaNoticeUndo);
-            btn.disabled = false;
-            btn.style.visibility = undoToken ? '' : 'hidden';
-            if (undoToken && onUndo) btn._listenerRef.fn = onUndo;
         } else if (state === 'failed') {
             msgEl.textContent = msg.qaNoticeFailed;
             setBtnText(msg.qaNoticeRetry);
@@ -4965,11 +4978,9 @@
         });
 
         // 等待 API 結果
-        executePromise.then(({ undoToken, partial }) => {
+        executePromise.then(({ undoToken }) => {
             clearInterval(countdownTimer);
-            // partial：兩段式流程只成功第一段（影片已移除、原因沒送出），
-            // 顯示成「部分成功」而不是成功，復原仍然可用。
-            renderNoticeContent(notice, partial ? 'partial' : 'done', key, msg, undoToken,
+            renderNoticeContent(notice, 'done', key, msg, undoToken,
                 (e) => { e.preventDefault(); e.stopPropagation(); restoreCard(undoToken); },
                 null
             );

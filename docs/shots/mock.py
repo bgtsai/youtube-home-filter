@@ -28,9 +28,11 @@ def card(i, age):
     html = f'''
 <ytd-rich-item-renderer class="sk-item">
  <yt-lockup-view-model id="c{i}" class="lockup">
-  <a href="/watch?v=mockvid{i:02d}" class="sk-thumb">
+  <a href="/watch?v=mockvid{i:02d}" class="sk-thumb ytLockupViewModelContentImage">
+   <yt-thumbnail-view-model class="sk-tvm">
     <img class="sk-img" alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%231d1d1d'/%3E%3Cpath d='M139 66l46 24-46 24z' fill='%233a3a3a'/%3E%3C/svg%3E">
     <span class="sk-dur"></span>
+   </yt-thumbnail-view-model>
   </a>
   <yt-lockup-metadata-view-model class="sk-meta">
     <div class="ytLockupMetadataViewModelAvatar sk-avatar"></div>
@@ -79,6 +81,7 @@ body{{margin:0;background:var(--bg);font-family:Roboto,Arial,sans-serif;color:#f
 .sk-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 16px}}
 .sk-thumb{{position:relative;aspect-ratio:16/9;border-radius:12px;background:var(--sk2);
  display:flex;align-items:center;justify-content:center}}
+.sk-tvm{{display:block;position:absolute;inset:0}}
 .sk-img{{width:100%;height:100%;object-fit:cover;border-radius:12px;display:block}}
 .sk-dur{{position:absolute;right:8px;bottom:8px;width:40px;height:16px;border-radius:4px;background:#000000aa}}
 .sk-meta{{display:flex;gap:12px;margin-top:12px;position:relative}}
