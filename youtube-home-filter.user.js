@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Home Filter: Industrial Standard
 // @namespace    https://github.com/bgtsai/youtube-home-filter
-// @version      12.35.0
+// @version      12.36.0
 // @description  過濾 YouTube 首頁影片，支援多種影片類型、年齡、已看等條件，並提供白名單、快速回饋按鈕等功能。
 // @author       BGTsai, Gemini Vibe Coding
 // @match        https://www.youtube.com/*
@@ -189,6 +189,7 @@
             qaActDontLike   : "Don't like",
             qaActDontRec    : "Don't recommend channel",
             qaNoticeRemoved : "Video removed",
+            qaNoticePartial : "Removed, but the reason was not sent",
             qaNoticePending : "Processing",
             qaNoticeFailed  : "Failed",
             qaNoticeRetry   : "Retry",
@@ -349,6 +350,7 @@
             qaActDontLike   : "不喜歡",
             qaActDontRec    : "不要推薦此頻道",
             qaNoticeRemoved : "影片已移除",
+            qaNoticePartial : "已移除，但原因未送出",
             qaNoticePending : "處理中",
             qaNoticeFailed  : "傳送失敗",
             qaNoticeRetry   : "重試",
@@ -1656,11 +1658,13 @@
             font-family: Roboto, "YouTube Sans", sans-serif;
         }
 
-        /* 縮圖外框：16:9 比例，帶明顯邊框與背景 */
+        /* 佔位外框：直接等於卡片自己的方框。
+           不要用 aspect-ratio 推算尺寸——首頁卡片是直向的（卡片寬 = 縮圖寬），
+           16:9 碰巧貼齊縮圖；側欄卡片是橫向的（456×160，縮圖只占左邊 285），
+           同一條規則就算出 256px 高、超出卡片 96px。量出來的才對，推算的會錯。 */
         .qa-notice-frame {
             position: absolute;
-            top: 0; left: 0; right: 0;
-            aspect-ratio: 16/9;
+            inset: 0;
             border-radius: 12px;
             border: 2px solid #3d3d3d;
             background: #0f0f0f;
@@ -1711,7 +1715,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-evenly;
+            /* 置中＋固定間距，不用 space-evenly：佔位卡現在等於卡片本身的方框，
+               高度隨版型變動（首頁約 340px、側欄只有 160px），用均分會讓高卡片
+               的文字散得很開、矮卡片又擠在一起。置中在任何高度都成立。 */
+            justify-content: center;
+            gap: 8px;
             padding: 12px 16px 0;
             width: 100%;
             box-sizing: border-box;
@@ -4460,8 +4468,17 @@
                 onload: (resp) => {
                     console.log('[YTFilter QA] sendFeedback HTTP:', resp.status);
                     if (resp.status >= 200 && resp.status < 300) {
-                        try { resolve(JSON.parse(resp.responseText)); }
-                        catch(e) { resolve({}); }
+                        // HTTP 2xx 不等於 YouTube 真的受理了：回應裡的 isProcessed
+                        // 才是權威結果。明確為 false 時當失敗，不要顯示成成功。
+                        let parsed;
+                        try { parsed = JSON.parse(resp.responseText); }
+                        catch(e) { resolve({}); return; }
+                        const processed = parsed?.feedbackResponses?.[0]?.isProcessed;
+                        if (processed === false) {
+                            reject(new Error('not_processed'));
+                            return;
+                        }
+                        resolve(parsed);
                     } else {
                         reject(new Error(`HTTP ${resp.status}`));
                     }
@@ -4497,46 +4514,54 @@
                 resp?.feedbackResponses?.[0]?.isProcessed);
             return { undoToken: dontRecommendUndoToken };
 
-        } else if (key === 'alreadyWatched') {
+        } else if (key === 'alreadyWatched' || key === 'dontLike') {
             // 兩步驟流程：
             // 步驟 1：送出 HIDE token，YouTube 會渲染 ytd-dismissal-reason-text-renderer
-            // 步驟 2：從 DOM 取 index 0（已看過）的 feedbackToken 送出，再關閉 dialog
+            // 步驟 2：從新出現的原因清單取對應項目的 feedbackToken 送出，再關閉 dialog
+            //   index 0 = 已看過、index 1 = 不喜歡
             if (!hideToken) throw new Error('token_missing');
-            const resp = await sendFeedback(hideToken);
-            console.log('[YTFilter QA] alreadyWatched step1 isProcessed:',
-                resp?.feedbackResponses?.[0]?.isProcessed);
-            const subToken = await waitForDismissalToken(0);
-            if (subToken) {
-                const resp2 = await sendFeedback(subToken);
-                console.log('[YTFilter QA] alreadyWatched step2 isProcessed:',
-                    resp2?.feedbackResponses?.[0]?.isProcessed);
-            } else {
-                console.warn('[YTFilter QA] alreadyWatched subToken 取得失敗');
-            }
-            closeDismissalDialog();
-            return { undoToken: hideUndoToken };
-
-        } else if (key === 'dontLike') {
-            // 兩步驟流程：
-            // 步驟 1：送出 HIDE token，YouTube 會渲染 ytd-dismissal-reason-text-renderer
-            // 步驟 2：從 DOM 取 index 1（不喜歡）的 feedbackToken 送出，再關閉 dialog
-            if (!hideToken) throw new Error('token_missing');
-            const resp = await sendFeedback(hideToken);
-            console.log('[YTFilter QA] dontLike step1 isProcessed:',
-                resp?.feedbackResponses?.[0]?.isProcessed);
-            const subToken = await waitForDismissalToken(1);
-            if (subToken) {
-                const resp2 = await sendFeedback(subToken);
-                console.log('[YTFilter QA] dontLike step2 isProcessed:',
-                    resp2?.feedbackResponses?.[0]?.isProcessed);
-            } else {
-                console.warn('[YTFilter QA] dontLike subToken 取得失敗');
-            }
-            closeDismissalDialog();
-            return { undoToken: hideUndoToken };
+            const index = (key === 'alreadyWatched') ? 0 : 1;
+            return runDismissalFlow(key, index, hideToken, hideUndoToken);
         }
 
         throw new Error('unknown_key');
+    }
+
+    // ── 兩段式流程：全域序列化 ──
+    // 原因清單（ytd-dismissal-reason-text-renderer）與 dialog 都是 document 層級的單例，
+    // 跟卡片無關。兩張卡同時走這條流程就會互相讀到對方的 dialog，把回饋送到錯的影片上。
+    // 所以用一條 promise 鏈把流程排隊，同一時間只允許一個在跑。
+    let dismissalChain = Promise.resolve();
+
+    function runDismissalFlow(key, index, hideToken, hideUndoToken) {
+        const run = async () => {
+            // 進場前先把殘留的 dialog 關掉，並記下「這次之前就存在」的原因清單，
+            // 之後只接受新出現的那一份。
+            closeDismissalDialog();
+            const before = new Set(document.querySelectorAll('ytd-dismissal-reason-text-renderer'));
+
+            const resp = await sendFeedback(hideToken);
+            console.log(`[YTFilter QA] ${key} step1 isProcessed:`,
+                resp?.feedbackResponses?.[0]?.isProcessed);
+
+            const subToken = await waitForDismissalToken(index, 3000, before);
+            if (!subToken) {
+                // 影片確實已被移除（步驟 1 成功），但「原因」沒送出去。
+                // 必須如實回報，不能當成完全成功——否則使用者會以為回饋已完整送達。
+                console.warn(`[YTFilter QA] ${key} subToken 取得失敗，原因未送出`);
+                closeDismissalDialog();
+                return { undoToken: hideUndoToken, partial: true };
+            }
+            const resp2 = await sendFeedback(subToken);
+            console.log(`[YTFilter QA] ${key} step2 isProcessed:`,
+                resp2?.feedbackResponses?.[0]?.isProcessed);
+            closeDismissalDialog();
+            return { undoToken: hideUndoToken };
+        };
+        // 無論前一個流程成功或失敗，都接著跑下一個；回傳這次自己的結果
+        const result = dismissalChain.then(run, run);
+        dismissalChain = result.catch(() => {});
+        return result;
     }
 
     // ── 取得元件的 Polymer / 新框架資料（兩種元件框架通用）──
@@ -4629,10 +4654,16 @@
     // ── 等待 ytd-dismissal-reason-text-renderer 出現並取得指定 index 的 feedbackToken ──
     // YouTube 在收到 HIDE feedback 後非同步渲染這個 dialog，所以需要等待 DOM 出現。
     // timeout 預設 3000ms，超時回傳 null（不影響第一步已完成的 feedback）。
-    function waitForDismissalToken(index, timeout = 3000) {
+    // 只接受「這次呼叫之後才出現」的原因清單：
+    // 這兩個元素是全域的（document 層級），跟卡片沒有任何關聯，
+    // 若直接取第 index 個，可能讀到上一次還沒關掉的 dialog，
+    // 等於把回饋送到別張卡片上。before 用來排除呼叫前就存在的元素。
+    function waitForDismissalToken(index, timeout = 3000, before = null) {
+        const stale = before || new Set();
         return new Promise((resolve) => {
             const check = () => {
-                const reasons = document.querySelectorAll('ytd-dismissal-reason-text-renderer');
+                const reasons = Array.from(document.querySelectorAll('ytd-dismissal-reason-text-renderer'))
+                    .filter(el => !stale.has(el));
                 if (reasons.length > index) {
                     const data = getItemData(reasons[index]);
                     const token = data?.feedbackToken ?? null;
@@ -4666,8 +4697,11 @@
     function getQAData(item) {
         try {
             // 首頁是 ytd-rich-item-renderer（資料包在 content.lockupViewModel），
-            // 播放頁側欄是裸 lockup（資料本身就是 lockupViewModel），兩種形狀都要支援
-            const L = getLockup(item) || getItemData(item);
+            // 播放頁側欄是裸 lockup（資料本身就是 lockupViewModel）。
+            // 外層取不到時再往內層 lockup 取一次——過濾邏輯本來就是以內層為準，
+            // 這裡跟它對齊，YouTube 日後把資料改掛在內層也不會整個失效。
+            const inner = item.matches(LOCKUP_SELECTOR) ? null : item.querySelector(LOCKUP_SELECTOR);
+            const L = getLockup(item) || (inner ? getLockup(inner) : null);
             const listItems = L?.metadata
                 ?.lockupMetadataViewModel?.menuButton?.buttonViewModel?.onTap
                 ?.innertubeCommand?.showSheetCommand?.panelLoadingStrategy
@@ -4838,6 +4872,14 @@
             btn.disabled = false;
             btn.style.visibility = undoToken ? '' : 'hidden';
             if (undoToken && onUndo) btn._listenerRef.fn = onUndo;
+        } else if (state === 'partial') {
+            // 兩段式流程只成功了第一段：影片確實被移除，但「原因」沒送出去。
+            // 這種情況不能顯示成完全成功，否則使用者會以為回饋已完整送達。
+            msgEl.textContent = msg.qaNoticePartial;
+            setBtnText(msg.qaNoticeUndo);
+            btn.disabled = false;
+            btn.style.visibility = undoToken ? '' : 'hidden';
+            if (undoToken && onUndo) btn._listenerRef.fn = onUndo;
         } else if (state === 'failed') {
             msgEl.textContent = msg.qaNoticeFailed;
             setBtnText(msg.qaNoticeRetry);
@@ -4923,9 +4965,11 @@
         });
 
         // 等待 API 結果
-        executePromise.then(({ undoToken }) => {
+        executePromise.then(({ undoToken, partial }) => {
             clearInterval(countdownTimer);
-            renderNoticeContent(notice, 'done', key, msg, undoToken,
+            // partial：兩段式流程只成功第一段（影片已移除、原因沒送出），
+            // 顯示成「部分成功」而不是成功，復原仍然可用。
+            renderNoticeContent(notice, partial ? 'partial' : 'done', key, msg, undoToken,
                 (e) => { e.preventDefault(); e.stopPropagation(); restoreCard(undoToken); },
                 null
             );
