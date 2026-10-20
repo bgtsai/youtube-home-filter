@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Home Filter: Industrial Standard
 // @namespace    https://github.com/bgtsai/youtube-home-filter
-// @version      12.33.0
+// @version      12.34.0
 // @description  過濾 YouTube 首頁影片，支援多種影片類型、年齡、已看等條件，並提供白名單、快速回饋按鈕等功能。
 // @author       BGTsai, Gemini Vibe Coding
 // @match        https://www.youtube.com/*
@@ -215,11 +215,6 @@
             clSearchPH          : 'Search fields…',
             clSearchBtn         : 'Search',
             clCustomOption      : 'Custom',
-            clGroupUi           : 'Interface text',
-            clGroupUiNote       : 'Labels and messages shown in the filter panel UI.',
-            clGroupDetection    : 'Detection keywords',
-            clGroupUnitLabels   : 'Time unit labels',
-            clGroupUnitLabelsNote: 'Display names for time units in the "Hide videos older than" dropdown.',
             clColRef            : 'English (reference)',
             clColTranslation    : 'Translation',
             clBtnClearAll       : 'Clear All',
@@ -380,11 +375,6 @@
             clSearchPH          : '搜尋欄位…',
             clSearchBtn         : '搜尋',
             clCustomOption      : '自訂語系',
-            clGroupUi           : '介面文字',
-            clGroupUiNote       : '篩選面板中顯示的標籤與訊息文字。',
-            clGroupDetection    : '偵測關鍵字',
-            clGroupUnitLabels   : '時間單位標籤',
-            clGroupUnitLabelsNote: '「隱藏影片早於」下拉選單中的時間單位顯示名稱。',
             clColRef            : '英文（參考）',
             clColTranslation    : '翻譯',
             clBtnClearAll       : '清除全部',
@@ -1361,19 +1351,6 @@
 
     // 僅限純字串 key 可被自訂語系覆蓋（排除 RegExp、Function、Object 等複合型態）
     const CL_EDITABLE_KEYS = Object.keys(LOCALES_MASTER.en).filter(k => typeof LOCALES_MASTER.en[k] === 'string');
-
-    // 自訂語系編輯器分組定義（決定分組標題與顯示順序）
-    const CL_KEY_GROUPS = [
-        {
-            groupKey: 'unitLabels',
-            keys: TIME_UNIT_KEYS.map(u => `unit${u}Label`)
-                .filter(k => CL_EDITABLE_KEYS.includes(k))
-        },
-        {
-            groupKey: 'ui',
-            keys: CL_EDITABLE_KEYS.filter(k => !k.startsWith('unit'))
-        }
-    ];
 
     const getMsg = () => {
         const base = LOCALES_MASTER[getActiveLang()] || LOCALES_MASTER[Object.keys(LOCALES_MASTER)[0]];
@@ -3562,7 +3539,7 @@
             #ytf-cl-editor .cl-hdr {
                 background:${tv('--t-panel-bg')};
                 border-bottom:1px solid ${tv('--t-divider')};
-                font-size:12px;font-weight:700;
+                font-size:14px;font-weight:700;
                 color:${tv('--t-text-main')};letter-spacing:0.2px;
                 display:flex;align-items:stretch;
                 height:44px;box-sizing:border-box;flex-shrink:0;
@@ -3593,38 +3570,11 @@
             }
             /* 變數名稱欄 */
             #ytf-cl-editor .cl-key-cell {
-                font-size:10px;font-family:monospace;
+                font-size:11px;font-family:monospace;
                 color:${tv('--t-text-main')};
                 padding-top:5px;word-break:normal;white-space:nowrap;
                 user-select:all;
             }
-            /* 分組標題列 — 使用 cl-g grid，▶ 在 num 欄，標題從 key 欄開始 */
-            #ytf-cl-editor .cl-row-hdr {
-                border-top:1px solid ${tv('--t-divider')};
-                background:${tv('--t-card-bg')};
-            }
-            #ytf-cl-editor .cl-row-hdr:first-child { border-top:none; }
-            #ytf-cl-editor .cl-group-arrow {
-                font-size:9px;color:${tv('--t-switch-on')};font-style:normal;
-                text-align:right;padding:8px 0 4px 0;align-self:start;
-            }
-            #ytf-cl-editor .cl-group-hdr {
-                grid-column:3/-1;
-                padding:8px 0 6px 0;
-            }
-            #ytf-cl-editor .cl-group-hdr-title {
-                font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
-                color:${tv('--t-text-main')};line-height:1.4;
-            }
-            #ytf-cl-editor .cl-group-note {
-                font-size:9px;letter-spacing:0;text-transform:none;
-                color:${tv('--t-text-muted')};margin-top:2px;line-height:1.5;
-                display:block;
-            }
-            #ytf-cl-editor .cl-group-link {
-                color:${tv('--t-switch-on')};text-decoration:underline;cursor:pointer;
-            }
-            #ytf-cl-editor .cl-group-link:hover { opacity:0.8; }
 
             /* ── 搜尋列 ── */
             #ytf-cl-editor .cl-search-row {
@@ -3639,7 +3589,7 @@
             }
             #ytf-cl-editor .cl-search-inp {
                 flex:1;height:28px;padding:0 10px;
-                font-size:11.5px;outline:none;
+                font-size:13px;outline:none;
                 background:${tv('--t-input-bg')};
                 border:1px solid ${tv('--t-input-border')};
                 border-radius:6px;
@@ -3655,7 +3605,7 @@
                 border:1px solid ${tv('--t-input-border')};
                 border-radius:6px;
                 background:${tv('--t-btn-bg')};color:${tv('--t-btn-text')};
-                font-size:11.5px;font-weight:600;cursor:pointer;
+                font-size:12px;font-weight:600;cursor:pointer;
                 transition:background 0.15s,color 0.15s;
                 white-space:nowrap;box-sizing:border-box;
             }
@@ -3680,7 +3630,7 @@
             #ytf-cl-editor .cl-ref-select,
             #ytf-cl-editor .cl-langcode-inp {
                 width:100%;height:28px;border-radius:6px;padding:0 8px;
-                font-size:11.5px;outline:none;
+                font-size:13px;outline:none;
                 background:${tv('--t-input-bg')};
                 border:1px solid ${tv('--t-input-border')};
                 color:${tv('--t-input-text')};
@@ -3691,23 +3641,19 @@
             #ytf-cl-editor .cl-langcode-inp:focus { border-color:${tv('--t-switch-on')}; }
             #ytf-cl-editor .cl-langcode-inp::placeholder { color:${tv('--t-text-muted')};opacity:0.5; }
 
-            /* ── 欄位標題（每分組各一份，上下各有分隔線，不填底色） ── */
+            /* ── 欄位標題（整份清單一份，上下各有分隔線，不填底色） ── */
             #ytf-cl-editor .cl-col-headers {
                 background:${tv('--t-panel-bg')};
                 padding-top:4px;padding-bottom:4px;
                 border-top:1px solid ${tv('--t-divider')};
                 border-bottom:1px solid ${tv('--t-divider')};
             }
-            /* ── 分組間距 ── */
-            #ytf-cl-editor .cl-group-gap {
-                height:16px;
-            }
-            #ytf-cl-editor .cl-col-num { font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:${tv('--t-text-main')};text-align:right; }
-            #ytf-cl-editor .cl-col-key { font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:${tv('--t-text-main')};text-align:left; }
-            #ytf-cl-editor .cl-col-ref { font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:${tv('--t-text-main')}; }
-            #ytf-cl-editor .cl-col-val { font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:${tv('--t-text-main')}; }
+            #ytf-cl-editor .cl-col-num { font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:${tv('--t-text-main')};text-align:right; }
+            #ytf-cl-editor .cl-col-key { font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:${tv('--t-text-main')};text-align:left; }
+            #ytf-cl-editor .cl-col-ref { font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:${tv('--t-text-main')}; }
+            #ytf-cl-editor .cl-col-val { font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:${tv('--t-text-main')}; }
             #ytf-cl-editor .cl-col-badge {
-                display:inline-block;font-size:8px;padding:1px 4px;
+                display:inline-block;font-size:9px;padding:1px 4px;
                 border-radius:3px;margin-left:4px;vertical-align:middle;
             }
             #ytf-cl-editor .cl-badge-r {
@@ -3736,16 +3682,16 @@
                 align-items:flex-start;
             }
             #ytf-cl-editor .cl-row.cl-hidden { display:none; }
-            #ytf-cl-editor .cl-num { padding-top:5px;font-size:10px;color:${tv('--t-text-main')};font-variant-numeric:tabular-nums;text-align:right; }
+            #ytf-cl-editor .cl-num { padding-top:5px;font-size:11px;color:${tv('--t-text-main')};font-variant-numeric:tabular-nums;text-align:right; }
             #ytf-cl-editor .cl-ref-cell {
-                font-size:11px;color:${tv('--t-text-main')};
+                font-size:12px;color:${tv('--t-text-main')};
                 background:${isDarkTheme ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.03)'};
                 border:1px solid ${tv('--t-input-border')};border-radius:5px;
                 padding:4px 7px;min-width:0;box-sizing:border-box;
                 line-height:1.45;white-space:pre-wrap;word-break:break-word;
             }
             #ytf-cl-editor .cl-inp {
-                border-radius:5px;padding:4px 7px;font-size:11.5px;outline:none;min-width:0;
+                border-radius:5px;padding:4px 7px;font-size:13px;outline:none;min-width:0;
                 background:${tv('--t-input-bg')};
                 border:1px solid ${tv('--t-input-border')};
                 color:${tv('--t-input-text')};
@@ -3765,7 +3711,7 @@
             }
             #ytf-cl-editor .cl-btn {
                 padding:5px 12px;border-radius:7px;border:none;
-                font-size:11.5px;font-weight:600;cursor:pointer;
+                font-size:12px;font-weight:600;cursor:pointer;
                 display:flex;align-items:center;justify-content:center;
                 transition:background 0.15s,color 0.15s;
             }
@@ -3809,7 +3755,7 @@
                 border-bottom:1px solid ${isDarkTheme ? 'rgba(200,0,0,0.25)' : 'rgba(200,0,0,0.15)'};
                 padding:12px 16px 10px;
             }
-            #ytf-cl-confirm-dialog .cld-title { font-size:13px;font-weight:700;color:${isDarkTheme ? '#ff6060' : '#c00'};margin-bottom:5px; }
+            #ytf-cl-confirm-dialog .cld-title { font-size:14px;font-weight:700;color:${isDarkTheme ? '#ff6060' : '#c00'};margin-bottom:5px; }
             #ytf-cl-confirm-dialog .cld-desc { font-size:11px;color:${tv('--t-text-main')};line-height:1.5; }
             #ytf-cl-confirm-dialog .cld-body {
                 padding:12px 16px;border-bottom:1px solid ${tv('--t-divider')};
@@ -3822,7 +3768,7 @@
             }
             #ytf-cl-confirm-dialog .cld-btn {
                 flex:1;padding:7px;border-radius:7px;border:none;
-                font-size:11.5px;font-weight:600;cursor:pointer;
+                font-size:12px;font-weight:600;cursor:pointer;
                 display:flex;align-items:center;justify-content:center;
                 transition:background 0.15s,color 0.15s;min-width:80px;
             }
@@ -3868,7 +3814,7 @@
                 border-bottom:1px solid ${isDarkTheme ? 'rgba(200,0,0,0.25)' : 'rgba(200,0,0,0.15)'};
                 padding:12px 16px 10px;
             }
-            #ytf-cl-confirm-dialog .cld-title { font-size:13px;font-weight:700;color:${isDarkTheme ? '#ff6060' : '#c00'};margin-bottom:5px; }
+            #ytf-cl-confirm-dialog .cld-title { font-size:14px;font-weight:700;color:${isDarkTheme ? '#ff6060' : '#c00'};margin-bottom:5px; }
             #ytf-cl-confirm-dialog .cld-desc { font-size:11px;color:${tv('--t-text-muted')};line-height:1.5; }
             #ytf-cl-confirm-dialog .cld-body {
                 padding:12px 16px;border-bottom:1px solid ${tv('--t-divider')};
@@ -3881,7 +3827,7 @@
             }
             #ytf-cl-confirm-dialog .cld-btn {
                 flex:1;padding:7px;border-radius:7px;border:none;
-                font-size:11.5px;font-weight:600;cursor:pointer;
+                font-size:12px;font-weight:600;cursor:pointer;
                 display:flex;align-items:center;justify-content:center;
                 transition:opacity 0.12s;min-width:80px;
             }
@@ -4147,17 +4093,6 @@
             });
         }
 
-        // ── 分組標題 locale key 對應 ──────────────────────────────────────────
-        const CL_GROUP_LABEL_KEYS = {
-            ui         : 'clGroupUi',
-            detection  : 'clGroupDetection',
-            unitLabels : 'clGroupUnitLabels',
-        };
-        const CL_GROUP_NOTE_KEYS = {
-            ui         : 'clGroupUiNote',
-            unitLabels : 'clGroupUnitLabelsNote',
-        };
-
         // ── 填入列表（按分組渲染）────────────────────────────────────────────
         const currentMap = parseCurrentLang();
         const defaultRefLang = Object.keys(LOCALES_MASTER).includes(getActiveLang())
@@ -4165,74 +4100,43 @@
         const refSelect = document.getElementById('ytf-cl-reflang');
         refSelect.value = defaultRefLang;
 
+        // 欄位標題列（整份清單一份）
+        const colHdr = document.createElement('div');
+        colHdr.className = 'cl-g cl-col-headers';
+        colHdr.innerHTML = _trustedHTML(`
+            <div class="cl-col-num">#</div><div></div>
+            <div class="cl-col-key">KEY</div><div></div>
+            <div class="cl-col-ref">${msg.clColRef}<span class="cl-col-badge cl-badge-r">唯讀</span></div>
+            <div></div>
+            <div class="cl-col-val">${msg.clColTranslation}<span class="cl-col-badge cl-badge-e">編輯中</span></div>
+        `);
+        clList.appendChild(colHdr);
+
         let rowNum = 0;
-        CL_KEY_GROUPS.forEach((group, groupIdx) => {
-            if (!group.keys.length) return;
-
-            // 分組間距（第一個分組不加）
-            if (groupIdx > 0) {
-                const gap = document.createElement('div');
-                gap.className = 'cl-group-gap';
-                clList.appendChild(gap);
-            }
-
-            // 分組標題列：▶ 在 num 欄，標題文字從 key 欄開始
-            const hdr = document.createElement('div');
-            hdr.className = 'cl-row-hdr cl-g';
-            const groupLabel = msg[CL_GROUP_LABEL_KEYS[group.groupKey]] || group.groupKey;
-            const noteKey    = { ui: 'clGroupUiNote', unitLabels: 'clGroupUnitLabelsNote' }[group.groupKey];
-            let noteHtml = '';
-            if (noteKey && msg[noteKey]) {
-                let rawNote = msg[noteKey];
-                noteHtml = `<span class="cl-group-note">${rawNote}</span>`;
-            }
-            hdr.innerHTML = _trustedHTML(`
-                <i class="cl-group-arrow">▶</i>
+        CL_EDITABLE_KEYS.forEach(key => {
+            rowNum++;
+            const row = document.createElement('div');
+            row.className = 'cl-row cl-g';
+            row.dataset.key = key;
+            const num    = String(rowNum).padStart(3, '0');
+            const refMap = getRefMap(defaultRefLang);
+            const refVal = refMap[key];
+            const trVal  = currentMap[key] !== undefined ? currentMap[key] : '';
+            row.innerHTML = _trustedHTML(`
+                <span class="cl-num">${num}</span>
                 <div></div>
-                <div class="cl-group-hdr">
-                    <div class="cl-group-hdr-title">${groupLabel}</div>
-                    ${noteHtml}
-                </div>
-            `);
-            clList.appendChild(hdr);
-
-            // 欄位標題列（每個分組各一份）
-            const colHdr = document.createElement('div');
-            colHdr.className = 'cl-g cl-col-headers';
-            colHdr.innerHTML = _trustedHTML(`
-                <div class="cl-col-num">#</div><div></div>
-                <div class="cl-col-key">KEY</div><div></div>
-                <div class="cl-col-ref">${msg.clColRef}<span class="cl-col-badge cl-badge-r">唯讀</span></div>
+                <span class="cl-key-cell">${key}</span>
                 <div></div>
-                <div class="cl-col-val">${msg.clColTranslation}<span class="cl-col-badge cl-badge-e">編輯中</span></div>
+                <div class="cl-ref-cell"></div>
+                <div></div>
+                <textarea class="cl-inp" rows="1" spellcheck="false"></textarea>
             `);
-            clList.appendChild(colHdr);
-
-            group.keys.forEach(key => {
-                rowNum++;
-                const row = document.createElement('div');
-                row.className = 'cl-row cl-g';
-                row.dataset.key = key;
-                const num    = String(rowNum).padStart(3, '0');
-                const refMap = getRefMap(defaultRefLang);
-                const refVal = refMap[key];
-                const trVal  = currentMap[key] !== undefined ? currentMap[key] : '';
-                row.innerHTML = _trustedHTML(`
-                    <span class="cl-num">${num}</span>
-                    <div></div>
-                    <span class="cl-key-cell">${key}</span>
-                    <div></div>
-                    <div class="cl-ref-cell"></div>
-                    <div></div>
-                    <textarea class="cl-inp" rows="1" spellcheck="false"></textarea>
-                `);
-                row.querySelector('.cl-ref-cell').textContent =
-                    typeof refVal === 'function' ? '(function)' : (refVal || '');
-                const ta = row.querySelector('.cl-inp');
-                ta.value = trVal;
-                ta.addEventListener('input', () => clAutoResize(ta));
-                clList.appendChild(row);
-            });
+            row.querySelector('.cl-ref-cell').textContent =
+                typeof refVal === 'function' ? '(function)' : (refVal || '');
+            const ta = row.querySelector('.cl-inp');
+            ta.value = trVal;
+            ta.addEventListener('input', () => clAutoResize(ta));
+            clList.appendChild(row);
         });
 
         requestAnimationFrame(() => {
