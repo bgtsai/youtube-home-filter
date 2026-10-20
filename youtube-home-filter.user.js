@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Home Filter: Industrial Standard
 // @namespace    https://github.com/bgtsai/youtube-home-filter
-// @version      12.34.0
+// @version      12.35.0
 // @description  過濾 YouTube 首頁影片，支援多種影片類型、年齡、已看等條件，並提供白名單、快速回饋按鈕等功能。
 // @author       BGTsai, Gemini Vibe Coding
 // @match        https://www.youtube.com/*
@@ -657,6 +657,12 @@
 
     const FETCH_TIMEOUT_MS = 6000;
     const MIN_VIDEO_COUNT  = 100;
+    // QA 快速回饋按鈕尺寸：空間夠就維持 36px（與 YouTube 三點按鈕同級），
+    // 不夠才等比縮小。播放頁側欄的文字欄只有約 159px，且三點按鈕就在同一列的右下角，
+    // 四顆 36px（含間距共 156px）會溢出去壓到縮圖，所以要依可用寬度動態決定。
+    const QA_BTN_MAX  = 36;   // 首頁與空間充足時的標準尺寸
+    const QA_BTN_MIN  = 26;   // 再小就不好點，低於此值寧可溢出也不再縮
+    const QA_BTN_GAP  = 4;    // 與 .qa-btn-row 的 gap 一致
     const GRID_SELECTOR    = "ytd-rich-item-renderer";
     // 過濾掃描的實際對象：首頁的 lockup 在 ytd-rich-item-renderer 內層，播放頁側欄則是裸的
     // lockup（class 含 ytLockupViewModelWrapper）。改抓內層即可兩邊共用同一套過濾邏輯。
@@ -1584,8 +1590,11 @@
             visibility: hidden;
             gap: 4px;
         }
-        /* 預留按鈕列的高度空間，加上上方間距 */
-        yt-lockup-metadata-view-model {
+        /* 預留按鈕列的高度空間，加上上方間距。
+           只套首頁：首頁的按鈕列獨占文字欄底下新的一列，需要空間；
+           播放頁側欄的三個點本來就在右下角，按鈕列跟它共用同一列、採疊加，
+           若在側欄也加這 44px，會把 YouTube 自己的三點按鈕往下推、改變原生版面。 */
+        ytd-rich-item-renderer yt-lockup-metadata-view-model {
             padding-bottom: 44px !important;
             box-sizing: border-box !important;
         }
@@ -1596,8 +1605,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: var(--qa-size, 36px);
+            height: var(--qa-size, 36px);
             border-radius: 50%;
             background: none;
             border: none;
@@ -1605,6 +1614,11 @@
             padding: 0;
             color: var(--yt-spec-text-secondary, #aaa);
             transition: background 0.15s ease, color 0.15s ease;
+        }
+        /* 圖示跟著按鈕縮放，維持原本 36:24 的比例 */
+        .qa-btn svg {
+            width:  calc(var(--qa-size, 36px) * 0.667);
+            height: calc(var(--qa-size, 36px) * 0.667);
         }
         .qa-btn:hover {
             background: var(--yt-spec-mono-tonal-hover, rgba(255,255,255,0.1));
@@ -4651,8 +4665,10 @@
     // 用 imageName 找 listItem，不依賴索引，語言無關
     function getQAData(item) {
         try {
-            const data = getItemData(item);
-            const listItems = data?.content?.lockupViewModel?.metadata
+            // 首頁是 ytd-rich-item-renderer（資料包在 content.lockupViewModel），
+            // 播放頁側欄是裸 lockup（資料本身就是 lockupViewModel），兩種形狀都要支援
+            const L = getLockup(item) || getItemData(item);
+            const listItems = L?.metadata
                 ?.lockupMetadataViewModel?.menuButton?.buttonViewModel?.onTap
                 ?.innertubeCommand?.showSheetCommand?.panelLoadingStrategy
                 ?.inlineContent?.sheetViewModel?.content?.listViewModel?.listItems;
@@ -4996,17 +5012,38 @@
 
         metaModel.appendChild(btnRow);
 
-        // 觸發顯示：mouseenter 時動態計算對齊三個點的位置
+        // 觸發顯示：mouseenter 時動態計算按鈕尺寸與對齊三個點的位置
         item.addEventListener('mouseenter', () => {
             const menuDiv = item.querySelector(YT_SELECTORS.menuButton);
-            if (menuDiv) {
+            const n = btnRow.children.length;
+            let size = QA_BTN_MAX;
+            if (menuDiv && n > 0) {
                 const menuRect = menuDiv.getBoundingClientRect();
                 const metaRect = metaModel.getBoundingClientRect();
-                // 三個點中心距 metaModel 右邊緣的距離
-                const menuCenterFromRight = metaRect.right - (menuRect.left + menuRect.width / 2);
-                // 讓我們最右邊按鈕的中心對齊三個點中心
-                btnRow.style.right = (menuCenterFromRight - 18) + 'px'; // 18 = 按鈕半徑 36/2
+
+                // 三個點跟我們的按鈕列是不是在同一條水平帶上：
+                // 首頁的三個點在文字欄右上角，按鈕列自己獨占底下那一列，整欄寬度都能用；
+                // 播放頁側欄的三個點就在右下角（ytLockupMetadataViewModelBottomRight），
+                // 跟按鈕列搶同一列，可用寬度只到三個點的左緣為止。
+                // 用幾何判斷而不是比對 class，YouTube 改 class 名不會讓這段失效。
+                const sameBand = (metaRect.bottom - menuRect.bottom) < QA_BTN_MAX;
+                const avail = sameBand
+                    ? (menuRect.left - metaRect.left - QA_BTN_GAP)
+                    : metaRect.width;
+
+                const fit = Math.floor((avail - QA_BTN_GAP * (n - 1)) / n);
+                size = Math.max(QA_BTN_MIN, Math.min(QA_BTN_MAX, fit));
+
+                if (sameBand) {
+                    // 同一列：排在三個點左邊、不覆蓋它，YouTube 原生選單仍然點得到
+                    btnRow.style.right = (metaRect.right - menuRect.left + QA_BTN_GAP) + 'px';
+                } else {
+                    // 自己獨占一列：最右邊按鈕的中心對齊三個點中心
+                    const menuCenterFromRight = metaRect.right - (menuRect.left + menuRect.width / 2);
+                    btnRow.style.right = (menuCenterFromRight - size / 2) + 'px';
+                }
             }
+            btnRow.style.setProperty('--qa-size', size + 'px');
             btnRow.classList.add('qa-visible');
         });
         item.addEventListener('mouseleave', () => btnRow.classList.remove('qa-visible'));
@@ -5014,9 +5051,11 @@
 
         // ── 快速動作按鈕：獨立掃描（不受過濾邏輯限制）──
     function scanAndInjectQAButtons() {
-        if (!isHomePage()) return;
-        document.querySelectorAll(GRID_SELECTOR).forEach(item => {
-            injectQAButtons(item);
+        if (!isFilterablePage()) return;
+        // 以內層 lockup 為基準：首頁有 ytd-rich-item-renderer 外層，播放頁側欄沒有，
+        // 取 closest() 取不到就用 lockup 本身，兩種版面共用同一條路徑。
+        document.querySelectorAll(LOCKUP_SELECTOR).forEach(lockup => {
+            injectQAButtons(lockup.closest(GRID_SELECTOR) || lockup);
         });
     }
 
@@ -5609,8 +5648,12 @@
             restoreTitleTooltips();
             hideTooltip();
             removeGridColumns();
-            // 播放頁：不顯示膠囊與面板，但側欄推薦清單仍套用內容過濾
-            if (isWatchPage()) processContent();
+            // 播放頁：不顯示膠囊與面板，但側欄推薦清單仍套用內容過濾與快速回饋按鈕
+            if (isWatchPage()) {
+                cleanupQANotices();
+                scanAndInjectQAButtons();
+                processContent();
+            }
             const spacer = document.getElementById(BOTTOM_SPACER_ID);
             if (spacer) spacer.remove();
         }
@@ -5627,12 +5670,9 @@
         if (!isFilterablePage()) return;
         clearTimeout(processTimer);
         processTimer = setTimeout(() => {
-            // 快速反饋按鈕、標題 tooltip、底部間距都是首頁專屬的介面，播放頁不套用；
-            // 播放頁只需要內容過濾本身。
-            if (isHomePage()) {
-                scanAndInjectQAButtons();
-                scanAndBindTitleTooltips();
-            }
+            // 快速反饋按鈕首頁與播放頁側欄都要；標題 tooltip 與底部間距是首頁專屬。
+            scanAndInjectQAButtons();
+            if (isHomePage()) scanAndBindTitleTooltips();
             if (config.enabled && !isFetching && !isRefreshing) {
                 processContent();
             }
