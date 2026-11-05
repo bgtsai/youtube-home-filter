@@ -1,20 +1,7 @@
 from playwright.sync_api import sync_playwright
 import json, pathlib
-SCRIPT=open('/home/claude/youtube-home-filter/youtube-home-filter.user.js',encoding='utf-8').read()
+from run_shared import SCRIPT, CFG, SHIM, URL as url
 CARDS=json.load(open('expect.json'))
-CFG={"enabled":True,"hideOldEnabled":True,"value":2,"unit":"day",
-     "hideLive":True,"hidePodcast":True,"hideMix":True,"hidePlaylist":False,
-     "hideUpcoming":False,"hideMusic":False,"hideMember":False,"hideRegular":False,
-     "hideWatched":False,"hideTitleFilter":False,"lang":"en","theme":"dark",
-     "whitelistMusic":[],"whitelistMember":[],"titleFilterList":[]}
-SHIM="""
-window.__store={'tm-yt-filter-cfg':%s};
-window.GM_getValue=(k,d)=>window.__store[k]!==undefined?window.__store[k]:d;
-window.GM_setValue=(k,v)=>{window.__store[k]=v;};
-window.GM_xmlhttpRequest=()=>{};window.unsafeWindow=window;
-window.__errs=[];window.addEventListener('error',e=>window.__errs.push(String(e.message)));
-""" % json.dumps(CFG)
-url="http://127.0.0.1:8786"
 with sync_playwright() as p:
     b=p.chromium.launch(args=["--no-sandbox"]); ctx=b.new_context(locale="zh-TW",viewport={"width":1400,"height":900})
     ctx.add_init_script(SHIM); pg=ctx.new_page()

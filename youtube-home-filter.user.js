@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Home Filter: Industrial Standard
 // @namespace    https://github.com/bgtsai/youtube-home-filter
-// @version      12.38.1
+// @version      12.39.0
 // @description  過濾 YouTube 首頁影片，支援多種影片類型、年齡、已看等條件，並提供白名單、快速回饋按鈕等功能。
 // @author       BGTsai, Gemini Vibe Coding
 // @match        https://www.youtube.com/*
@@ -793,6 +793,13 @@
     // 本次頁面工作階段的手動移除清單（使用者透過快速反饋按鈕主動移除的影片 ID）
     // 僅存在於記憶體中，頁面重新載入後自動清除
     const manuallyRemovedIds = new Set();
+    // 最近一次 processContent() 對每張卡片的判定（lockup → 判定）；交給頁面狀態封存器的 __diagQueue，
+    // 封存檔就能直接回答「這張為什麼被藏」，不用從畫面反推。
+    const lastVerdicts = new Map();
+    let lastVerdictsAt = null;
+    function recordVerdict(lockup, item, videoId, rule, detail) {
+        lastVerdicts.set(lockup, { lockup, item, videoId, rule, detail });
+    }
     // MutationObserver 的 debounce 計時器
     let processTimer       = null;
 
@@ -5130,6 +5137,9 @@
 
         // 重複影片過濾：每次掃描建立新的 Set，確保跨次掃描不互相干擾
         const seenVideoIds = new Set();
+        // 判定表只保留最近一次掃描（給 __diagQueue；每張卡片一筆，不會無限成長）
+        lastVerdicts.clear();
+        lastVerdictsAt = new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Taipei' }) + ' +08:00';
 
         // 掃描 lockup 本體：首頁的 lockup 位於 ytd-rich-item-renderer 內層，
         // 播放頁側欄則沒有外層容器，抓內層可讓兩種版面共用同一套過濾。
@@ -5146,6 +5156,7 @@
             // 風險：若未來出現「不是廣告卻讀不到資料」的卡片，它會被誤隱藏——
             // 下面這行 console.debug 就是用來發現這種情況的（每張卡片只印一次）。
             if (!info) {
+                recordVerdict(lockup, item, null, 'noData', null);
                 if (!lockup.dataset.ytfNoData) {
                     lockup.dataset.ytfNoData = '1';
                     console.debug('[YTFilter] 無 view-model 資料（視為廣告並隱藏）：',
@@ -5160,7 +5171,7 @@
             }
 
             // 正在顯示 QA 通知的卡片跳過過濾，避免 MutationObserver 觸發時錯誤隱藏
-            if (item.querySelector('.qa-feedback-notice')) return;
+            if (item.querySelector('.qa-feedback-notice')) { recordVerdict(lockup, item, null, 'skip:qaNotice', null); return; }
 
             // 取得影片 ID，用於重複偵測（與手動移除清單共用同一取值邏輯）
             const videoId = getVideoIdFromItem(item);
@@ -5170,6 +5181,7 @@
                 // 這一條對所有 lockup 生效：按過「不喜歡」的影片，在「新片」之類的
                 // 區塊裡也該一起消失。
                 if (manuallyRemovedIds.has(videoId)) {
+                    recordVerdict(lockup, item, videoId, 'manuallyRemoved', null);
                     if (item.style.display !== 'none') {
                         item.style.setProperty('display', 'none', 'important');
                         hasChanged = true;
@@ -5184,6 +5196,7 @@
                 // 實測一次有 40 個區塊 lockup 汙染名單、誤擋 18 張卡片。
                 if (outer) {
                     if (seenVideoIds.has(videoId)) {
+                        recordVerdict(lockup, item, videoId, 'duplicate', null);
                         if (item.style.display !== "none") {
                             item.style.setProperty("display", "none", "important");
                             hasChanged = true;
@@ -5288,23 +5301,25 @@
             }
 
             let shouldBeHidden = false;
+            let hideReason = null;   // 給 __diagQueue：命中哪一條規則
+            let hideDetail = null;
 
             // 2. 文字比對（成本最低，優先執行）
             const cleanText = item.innerText.toLowerCase().trim();
             // 類型判斷：一律使用語言無關的列舉值。
             // 「正在直播」靠 badgeStyle 判斷，已結束的直播存檔徽章是時長而非 LIVE，
             // 因此不會被誤殺——這正是使用者要的語意（只擋正在播的）。
-            if (config.hideLive && info.isLive) shouldBeHidden = true;
-            else if (config.hideUpcoming && item.querySelector(YT_SELECTORS.upcomingButton)) shouldBeHidden = true;
-            else if (config.hidePodcast  && info.isPodcast)  shouldBeHidden = true;
-            else if (config.hideMix      && info.isMix)      shouldBeHidden = true;
-            else if (config.hidePlaylist && info.isPlaylist) shouldBeHidden = true;
+            if (config.hideLive && info.isLive) { shouldBeHidden = true; hideReason = 'live'; }
+            else if (config.hideUpcoming && item.querySelector(YT_SELECTORS.upcomingButton)) { shouldBeHidden = true; hideReason = 'upcoming'; }
+            else if (config.hidePodcast  && info.isPodcast)  { shouldBeHidden = true; hideReason = 'podcast'; }
+            else if (config.hideMix      && info.isMix)      { shouldBeHidden = true; hideReason = 'mix'; }
+            else if (config.hidePlaylist && info.isPlaylist) { shouldBeHidden = true; hideReason = 'playlist'; }
 
             // 3. 音樂影片（DOM 查找 + 白名單）
             if (!shouldBeHidden && config.hideMusic) {
                 const musicIcon = item.querySelector(`path[d="${MUSIC_PATH_D}"]`);
                 if (musicIcon && !musicWhitelistSet.has(channelName)) {
-                    shouldBeHidden = true;
+                    shouldBeHidden = true; hideReason = 'music';
                 }
             }
 
@@ -5312,7 +5327,7 @@
             if (!shouldBeHidden && config.hideMember) {
                  const memberIcon = item.querySelector(`path[d="${MEMBER_PATH_D}"]`);
                  if (memberIcon && !memberWhitelistSet.has(channelName)) {
-                     shouldBeHidden = true;
+                     shouldBeHidden = true; hideReason = 'member';
                  }
             }
 
@@ -5329,7 +5344,7 @@
                 const isMember   = !!item.querySelector(`path[d="${MEMBER_PATH_D}"]`);
                 const isSpecial  = isLive || isUpcoming || isPodcast || isMix || isPlaylist || isMusic || isMember;
                 if (!isSpecial) {
-                    shouldBeHidden = true;
+                    shouldBeHidden = true; hideReason = 'regular';
                 }
             }
 
@@ -5343,7 +5358,7 @@
                         // 有指定頻道時，頻道不符則跳過此規則
                         if (channel && channel !== channelName) continue;
                         const re = parseTitleFilterRule(pattern);
-                        if (re && re.test(titleText)) { shouldBeHidden = true; break; }
+                        if (re && re.test(titleText)) { shouldBeHidden = true; hideReason = 'titleFilter'; hideDetail = { pattern, channel: channel || null, title: titleText }; break; }
                     }
                 }
             }
@@ -5359,10 +5374,10 @@
                          const durationSec = parseDurationStr(badge.textContent);
                          const watchedSec = durationSec * (progressPct / 100);
                          if (progressPct >= config.watchedPercent || watchedSec >= config.watchedSeconds) {
-                             shouldBeHidden = true;
+                             shouldBeHidden = true; hideReason = 'watched'; hideDetail = { progressPct, watchedSec, durationSec };
                          }
                     } else {
-                        if (progressPct >= config.watchedPercent) shouldBeHidden = true;
+                        if (progressPct >= config.watchedPercent) { shouldBeHidden = true; hideReason = 'watched'; hideDetail = { progressPct, noDurationBadge: true }; }
                     }
                 }
             }
@@ -5381,10 +5396,11 @@
                         if (sec !== null) { videoSeconds = sec; break; }
                     }
                 }
-                if (videoSeconds !== null && videoSeconds > thresholdSec) shouldBeHidden = true;
+                if (videoSeconds !== null && videoSeconds > thresholdSec) { shouldBeHidden = true; hideReason = 'age'; hideDetail = { videoSeconds, thresholdSec }; }
             }
 
             const isActuallyEmpty = item.innerText.trim() === "" && item.querySelectorAll('img').length === 0;
+            recordVerdict(lockup, item, videoId, shouldBeHidden ? hideReason : isActuallyEmpty ? 'empty' : 'shown', hideDetail);
             if ((shouldBeHidden || isActuallyEmpty) && item.style.display !== "none") {
                 item.style.setProperty("display", "none", "important");
                 hasChanged = true;
@@ -5754,6 +5770,29 @@
     });
     observer.observe(document.body, { childList: true, subtree: true });
     setInterval(() => { if (isHomePage() && !document.getElementById("yt-filter-shadow-host")) document.documentElement.appendChild(host); }, 4000);
+
+    // 交出內部狀態給頁面狀態封存器（bgtsai/page-state-recorder）。封存當下才呼叫，平常零成本。
+    // Firefox 的 Tampermonkey 在 YouTube 會跑在隔離沙箱（CSP 擋住網頁環境注入），兩支腳本各在各的沙箱，
+    // 只能透過網頁的 window 交換：函式要 exportFunction、資料要 cloneInto（DOM 節點要 wrapReflectors）。
+    try {
+        const isolated = pageWindow !== window && typeof cloneInto === 'function';
+        const toPageData = (o) => isolated ? cloneInto(o, pageWindow, { wrapReflectors: true }) : o;
+        const snapshot = () => toPageData({
+            version: (typeof GM_info !== 'undefined' && GM_info.script) ? GM_info.script.version : null,
+            config: JSON.parse(JSON.stringify(config)),
+            manuallyRemovedIds: Array.from(manuallyRemovedIds),
+            verdictsAt: lastVerdictsAt,
+            verdicts: Array.from(lastVerdicts.values()),
+            state: { isFetching, hasReachedLimit, isRefreshing, isHomePage: isHomePage() },
+        });
+        const fn = isolated && typeof exportFunction === 'function' ? exportFunction(snapshot, pageWindow) : snapshot;
+        const queue = pageWindow.__diagQueue || (pageWindow.__diagQueue = toPageData([]));
+        const entry = toPageData(['YouTube Home Filter']);
+        entry.push(fn);
+        queue.push(entry);
+    } catch (e) {
+        console.warn('[YTFilter] 註冊 __diagQueue 失敗（不影響過濾功能）：', e);
+    }
 
     handleRoute();
 })();

@@ -26,4 +26,6 @@ FIXLANG=ja python3 fixture.py && FIXLANG=ja python3 run.py   # 換語系重測
 - Podcast 列舉值
 - 會員卡片 `metadataRows` 末列為空陣列時，時間仍須解析正確
 
-改動過濾邏輯後請重跑；新增情境時把真實資料結構加進 `fixture.py` 的 `CARDS`。
+`diag.py` 是另一支整合測試：同時裝[頁面狀態封存器](https://github.com/bgtsai/page-state-recorder)，封存後檢查本腳本透過 `__diagQueue` 交出的每張卡片判定規則（`hideReason`）是否正確。需要封存器的 `.user.js`（預設 `/home/claude/page-state-recorder/page-state-recorder.user.js`，可用 `PSR=路徑` 指定）。`run.py` 與 `diag.py` 共用 `run_shared.py` 的設定與 GM 替身。
+
+改動過濾邏輯後請重跑；新增或改名過濾規則時，`diag.py` 的 `EXPECT` 要一起更新；新增情境時把真實資料結構加進 `fixture.py` 的 `CARDS`。
