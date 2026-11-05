@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Home Filter: Industrial Standard
 // @namespace    https://github.com/bgtsai/youtube-home-filter
-// @version      12.38.0
+// @version      12.38.1
 // @description  過濾 YouTube 首頁影片，支援多種影片類型、年齡、已看等條件，並提供白名單、快速回饋按鈕等功能。
 // @author       BGTsai, Gemini Vibe Coding
 // @match        https://www.youtube.com/*
@@ -5166,7 +5166,9 @@
             const videoId = getVideoIdFromItem(item);
 
             if (videoId) {
-                // 使用者本次已主動移除此影片，直接隱藏，不受去重邏輯順序影響
+                // 使用者本次已主動移除此影片，直接隱藏，不受去重邏輯順序影響。
+                // 這一條對所有 lockup 生效：按過「不喜歡」的影片，在「新片」之類的
+                // 區塊裡也該一起消失。
                 if (manuallyRemovedIds.has(videoId)) {
                     if (item.style.display !== 'none') {
                         item.style.setProperty('display', 'none', 'important');
@@ -5174,14 +5176,22 @@
                     }
                     return;
                 }
-                if (seenVideoIds.has(videoId)) {
-                    if (item.style.display !== "none") {
-                        item.style.setProperty("display", "none", "important");
-                        hasChanged = true;
+                // 重複影片過濾只在首頁格線卡片之間進行（outer 存在才算格線卡片）。
+                // 首頁同一支影片常常同時出現在「新片」區塊（ytd-item-section-renderer）
+                // 與下方格線裡；區塊那一份沒有外層卡片，若讓它也登記 ID，迴圈走到
+                // 格線上的正式卡片時就會被判成重複而整張擋掉——被犧牲的永遠是正式
+                // 卡片。v12.35.0 把掃描從「掃卡片」改成「掃 lockup」時引進這個缺陷，
+                // 實測一次有 40 個區塊 lockup 汙染名單、誤擋 18 張卡片。
+                if (outer) {
+                    if (seenVideoIds.has(videoId)) {
+                        if (item.style.display !== "none") {
+                            item.style.setProperty("display", "none", "important");
+                            hasChanged = true;
+                        }
+                        return;
+                    } else {
+                        seenVideoIds.add(videoId);
                     }
-                    return;
-                } else {
-                    seenVideoIds.add(videoId);
                 }
             }
 

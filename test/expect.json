@@ -217,6 +217,39 @@
   "why": "日文頁面：1 時間前，未超門檻"
  },
  {
+  "id": "shelf-dup",
+  "bare": true,
+  "home": true,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "某頻道",
+    "1521",
+    "1 小時前"
+   ]
+  ],
+  "href": "/watch?v=dup1",
+  "expect": "show",
+  "why": "「新片」區塊那一份，本身很新→保留"
+ },
+ {
+  "id": "grid-dup",
+  "bare": false,
+  "ct": "LOCKUP_CONTENT_TYPE_VIDEO",
+  "badge": "DEFAULT",
+  "rows": [
+   [
+    "某頻道",
+    "1521",
+    "1 小時前"
+   ]
+  ],
+  "href": "/watch?v=dup1",
+  "expect": "show",
+  "why": "格線正式卡片：不可因區塊那一份登記過 ID 就被當成重複"
+ },
+ {
   "id": "podcast",
   "bare": false,
   "ct": "LOCKUP_CONTENT_TYPE_PODCAST",

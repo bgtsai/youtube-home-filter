@@ -32,6 +32,13 @@ CARDS=[
       rows=[["チャンネル","5000","3 か月前"]], href="/watch?v=j1", expect="hide", why="日文頁面：3 か月前 > 門檻"),
  dict(id="ja-new",    bare=False, ct="LOCKUP_CONTENT_TYPE_VIDEO", badge="DEFAULT",
       rows=[["チャンネル","3013","1 時間前"]], href="/watch?v=j2", expect="show", why="日文頁面：1 時間前，未超門檻"),
+ # 去重汙染回歸（v12.38.1）：首頁「新片」區塊的 lockup 沒有外層卡片，
+ # 它若登記了影片 ID，格線上同一支影片的正式卡片就會被誤判成重複而整張消失。
+ # shelf 那一份要排在格線卡片之前，順序才跟實際頁面一致。
+ dict(id="shelf-dup", bare=True, home=True, ct="LOCKUP_CONTENT_TYPE_VIDEO", badge="DEFAULT",
+      rows=[["某頻道","1521","1 小時前"]], href="/watch?v=dup1", expect="show", why="「新片」區塊那一份，本身很新→保留"),
+ dict(id="grid-dup", bare=False, ct="LOCKUP_CONTENT_TYPE_VIDEO", badge="DEFAULT",
+      rows=[["某頻道","1521","1 小時前"]], href="/watch?v=dup1", expect="show", why="格線正式卡片：不可因區塊那一份登記過 ID 就被當成重複"),
  dict(id="podcast", bare=False, ct="LOCKUP_CONTENT_TYPE_PODCAST", badge=None,
       rows=[["某頻道","1 小時前"]], href="/watch?v=e9", expect="hide", why="Podcast 列舉值"),
 ]

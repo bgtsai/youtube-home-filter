@@ -31,7 +31,10 @@ with sync_playwright() as p:
         ok=fail=0
         for c in CARDS:
             if page=="/watch" and not c["bare"]: continue
-            if page=="/" and c["bare"]: continue
+            # bare 卡片預設只在播放頁測；標了 home 的是首頁「新片」區塊那種
+            # 沒有外層卡片的 lockup，要在首頁測
+            if page=="/" and c["bare"] and not c.get("home"): continue
+            if page=="/watch" and c.get("home"): continue
             import os
             ja = c["id"].startswith("ja-")
             if ja != (os.environ.get("FIXLANG")=="ja"): continue
